@@ -1,0 +1,10 @@
+.marquee-section {
+  position: relative;
+  z-index: 10;
+  border-top: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
