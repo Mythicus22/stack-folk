@@ -15,18 +15,12 @@ import FAQ from './sections/FAQ'
 import CTA from './sections/CTA'
 
 export default function App() {
-  const { cursorRef, followerRef } = useCursor()
+  const { cursorRef } = useCursor()
 
   return (
     <>
-      {/* Precision Cyber Reticle Cursor */}
-      <div ref={cursorRef} className="cursor-dot" aria-hidden="true" />
-      <div ref={followerRef} className="cursor-reticle" aria-hidden="true">
-        <span className="reticle-corner reticle-corner--tl" />
-        <span className="reticle-corner reticle-corner--tr" />
-        <span className="reticle-corner reticle-corner--bl" />
-        <span className="reticle-corner reticle-corner--br" />
-      </div>
+      {/* Cool Sleek Green Circle Cursor */}
+      <div ref={cursorRef} className="cursor-circle" aria-hidden="true" />
 
       {/* Whole-page 3D Background */}
       <ThreeDBackground />

@@ -6,12 +6,7 @@ const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 export default function CTA() {
   return (
     <section className="cta-section" id="join">
-      {/* Glitch text background */}
-      <div className="cta__bg-text" aria-hidden>MAKE</div>
-
       <div className="container cta__container">
-        <div className="cta__geo cta__geo--circle" />
-
         <motion.div
           className="label"
           initial={{ opacity: 0, x: -30 }}
@@ -62,15 +57,6 @@ export default function CTA() {
             <span>Partner with us</span>
           </a>
         </motion.div>
-
-        {/* Animated ring */}
-        <motion.div
-          className="cta__ring"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={vp}
-          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        />
       </div>
     </section>
   )

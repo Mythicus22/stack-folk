@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="navbar__inner">
         {/* Logo */}
         <a href="#" className="navbar__logo">
-          <img src="/logo.jpeg" alt="Stackfolk" className="navbar__logo-img" />
+          <img src="/logo.png" alt="Stackfolk" className="navbar__logo-img" />
         </a>
 
         {/* Desktop links */}

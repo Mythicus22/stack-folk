@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="footer__top">
           <div className="footer__brand">
             <a href="#" className="footer__logo">
-              <img src="/logo.jpeg" alt="Stackfolk" className="footer__logo-img" />
+              <img src="/logo.png" alt="Stackfolk" className="footer__logo-img" />
             </a>
             <p className="footer__tagline">A community for ambitious builders.</p>
             <div className="footer__social">
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
           <div className="footer__bottom-right">
             <div className="footer__lets-build">
-              <span className="footer__lets-build-text">LET'S BUILD</span>
+              <span className="footer__lets-build-text">LET&apos;S BUILD</span>
               <div className="footer__lets-build-dot" />
             </div>
           </div>

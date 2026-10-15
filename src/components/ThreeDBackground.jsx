@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
 
 export default function ThreeDBackground() {
   const canvasRef = useRef(null)
@@ -6,425 +7,300 @@ export default function ThreeDBackground() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true })
 
-    let width = (canvas.width = window.innerWidth)
-    let height = (canvas.height = window.innerHeight)
-    let animationFrameId
-    let isMobile = window.innerWidth < 768
+    let width = window.innerWidth
+    let height = window.innerHeight
+    let isMobile = width < 768
 
-    // Interactive Mouse & Inertia Tracking
-    let targetTiltX = 0
-    let targetTiltY = 0
-    let currentTiltX = 0
-    let currentTiltY = 0
-    let mouseX = width / 2
-    let mouseY = height / 2
-    let targetMouseX = width / 2
-    let targetMouseY = height / 2
+    // ── 1. Scene, Camera & WebGL Renderer ──
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(52, width / height, 1, 3000)
+    camera.position.set(0, 0, 680)
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setSize(width, height)
+
+    // ── 2. Binary, Hex & Code Symbol Texture Atlas (No English words) ──
+    const SYMBOL_SET = [
+      // Binary
+      '0', '1', '0', '1', '00', '01', '10', '11', '101', '010', '110', '1001',
+      // Hexadecimal
+      '0x0', '0x1', '0x7F', '0xFF', '0x2A', '0x42', '7F', 'FF', '2A', 'A3', 'E0', '0x10',
+      // Code primitives & symbols
+      '//', '::', '<>', '[]', '=>{}', '#0', '*1*', '&&', '||', '>='
+    ]
+
+    const textures = []
+    const materials = []
+
+    SYMBOL_SET.forEach((symbol) => {
+      const c = document.createElement('canvas')
+      c.width = 128
+      c.height = 128
+      const ctx = c.getContext('2d')
+
+      ctx.clearRect(0, 0, 128, 128)
+      ctx.font = 'bold 54px "DM Mono", "Courier New", monospace'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+
+      // High-tech cyber neon styling with subtle glow
+      ctx.shadowColor = 'rgba(57, 255, 20, 0.85)'
+      ctx.shadowBlur = 12
+      ctx.fillStyle = '#39ff14'
+      ctx.fillText(symbol, 64, 64)
+
+      // Crisp inner core
+      ctx.shadowBlur = 0
+      ctx.fillStyle = '#ebffe8'
+      ctx.fillText(symbol, 64, 64)
+
+      const texture = new THREE.CanvasTexture(c)
+      texture.minFilter = THREE.LinearFilter
+      texture.magFilter = THREE.LinearFilter
+      textures.push(texture)
+
+      const mat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.14,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+      materials.push(mat)
+    })
+
+    // ── 3. Floating 3D Symbol Particles ──
+    const PARTICLE_COUNT = isMobile ? 160 : 320
+    const particles = []
+    const particleGroup = new THREE.Group()
+    scene.add(particleGroup)
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const matIndex = i % materials.length
+      const material = materials[matIndex].clone()
+      const sprite = new THREE.Sprite(material)
+
+      const spreadX = isMobile ? 650 : 1100
+      const spreadY = isMobile ? 700 : 900
+      const spreadZ = 320
+
+      const baseX = (Math.random() - 0.5) * spreadX
+      const baseY = (Math.random() - 0.5) * spreadY
+      const baseZ = (Math.random() - 0.5) * spreadZ
+
+      const baseScale = Math.random() * 6 + (isMobile ? 16 : 20)
+      sprite.scale.set(baseScale, baseScale, 1)
+      sprite.position.set(baseX, baseY, baseZ)
+      particleGroup.add(sprite)
+
+      particles.push({
+        sprite,
+        baseX,
+        baseY,
+        baseZ,
+        currentX: baseX,
+        currentY: baseY,
+        currentZ: baseZ,
+        vy: (Math.random() - 0.5) * 0.28,
+        vx: (Math.random() - 0.5) * 0.12,
+        baseOpacity: Math.random() * 0.08 + 0.11,
+        currentOpacity: 0.12,
+        baseScale,
+        orbitOffset: Math.random() * Math.PI * 2,
+        orbitSpeed: (Math.random() > 0.5 ? 1 : -1) * (0.01 + Math.random() * 0.008)
+      })
+    }
+
+    // ── 4. Deep Telemetry Matrix Points ──
+    const DOT_COUNT = isMobile ? 200 : 500
+    const dotGeometry = new THREE.BufferGeometry()
+    const dotPositions = new Float32Array(DOT_COUNT * 3)
+
+    for (let i = 0; i < DOT_COUNT; i++) {
+      dotPositions[i * 3] = (Math.random() - 0.5) * 1400
+      dotPositions[i * 3 + 1] = (Math.random() - 0.5) * 1400
+      dotPositions[i * 3 + 2] = -Math.random() * 500 - 50
+    }
+    dotGeometry.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3))
+
+    const dotMaterial = new THREE.PointsMaterial({
+      size: 2.0,
+      color: 0x39ff14,
+      transparent: true,
+      opacity: 0.08,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    })
+    const dotPoints = new THREE.Points(dotGeometry, dotMaterial)
+    scene.add(dotPoints)
+
+    // ── 5. Mouse Raycasting to 3D World Space (Z=0 Plane) ──
+    const raycaster = new THREE.Raycaster()
+    const mouseNDC = new THREE.Vector2(-10, -10)
+    const targetNDC = new THREE.Vector2(-10, -10)
+    const planeZ0 = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)
+    const cursorWorld = new THREE.Vector3(9999, 9999, 0)
+    let isMouseOnScreen = false
+
+    let targetCameraX = 0
+    let targetCameraY = 0
     let scrollY = window.scrollY || 0
     let targetScrollY = scrollY
 
-    const handleMouseMove = (e) => {
-      targetMouseX = e.clientX
-      targetMouseY = e.clientY
-      targetTiltX = (e.clientX / width - 0.5) * 0.45
-      targetTiltY = (e.clientY / height - 0.5) * 0.35
+    const onMouseMove = (e) => {
+      isMouseOnScreen = true
+      targetNDC.x = (e.clientX / window.innerWidth) * 2 - 1
+      targetNDC.y = -(e.clientY / window.innerHeight) * 2 + 1
+
+      targetCameraX = targetNDC.x * 40
+      targetCameraY = targetNDC.y * 30
     }
 
-    const handleScroll = () => {
+    const onScroll = () => {
       targetScrollY = window.scrollY || 0
     }
 
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
-      isMobile = window.innerWidth < 768
+    const onMouseLeave = () => {
+      isMouseOnScreen = false
+      targetNDC.set(-10, -10)
+      targetCameraX = 0
+      targetCameraY = 0
     }
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize)
-
-    // ── 3D Projection Math ──
-    const fov = 520
-
-    const rotateX = (y, z, angle) => [
-      y * Math.cos(angle) - z * Math.sin(angle),
-      y * Math.sin(angle) + z * Math.cos(angle)
-    ]
-    const rotateY = (x, z, angle) => [
-      x * Math.cos(angle) + z * Math.sin(angle),
-      -x * Math.sin(angle) + z * Math.cos(angle)
-    ]
-    const rotateZ = (x, y, angle) => [
-      x * Math.cos(angle) - y * Math.sin(angle),
-      x * Math.sin(angle) + y * Math.cos(angle)
-    ]
-
-    // ── 3D Polyhedra Generators ──
-    // 1. Tesseract (Hypercube in 3D projection)
-    const createTesseract = (cx, cy, cz, size) => {
-      const s1 = size * 0.55
-      const s2 = size * 0.28
-      const v = [
-        // Outer cube
-        [-s1, -s1, -s1], [s1, -s1, -s1], [s1, s1, -s1], [-s1, s1, -s1],
-        [-s1, -s1, s1],  [s1, -s1, s1],  [s1, s1, s1],  [-s1, s1, s1],
-        // Inner cube
-        [-s2, -s2, -s2], [s2, -s2, -s2], [s2, s2, -s2], [-s2, s2, -s2],
-        [-s2, -s2, s2],  [s2, -s2, s2],  [s2, s2, s2],  [-s2, s2, s2],
-      ]
-      const e = [
-        // Outer
-        [0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4],
-        [0, 4], [1, 5], [2, 6], [3, 7],
-        // Inner
-        [8, 9], [9, 10], [10, 11], [11, 8], [12, 13], [13, 14], [14, 15], [15, 12],
-        [8, 12], [9, 13], [10, 14], [11, 15],
-        // Struts connecting outer to inner
-        [0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]
-      ]
-      return { cx, cy, cz, initialY: cy, vertices: v, edges: e, rx: 0.2, ry: 0.3, rz: 0.1, spinSpeed: 0.007, label: 'HYPERCUBE // T-01' }
+    const onResize = () => {
+      width = window.innerWidth
+      height = window.innerHeight
+      isMobile = width < 768
+      camera.aspect = width / height
+      camera.updateProjectionMatrix()
+      renderer.setSize(width, height)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     }
 
-    // 2. Octahedron with Equator Ring
-    const createOctahedron = (cx, cy, cz, size) => {
-      const s = size * 0.65
-      const v = [
-        [0, -s * 1.25, 0], [0, s * 1.25, 0],
-        [-s, 0, 0], [s, 0, 0],
-        [0, 0, -s], [0, 0, s]
-      ]
-      const e = [
-        [0, 2], [0, 3], [0, 4], [0, 5],
-        [1, 2], [1, 3], [1, 4], [1, 5],
-        [2, 4], [4, 3], [3, 5], [5, 2]
-      ]
-      return { cx, cy, cz, initialY: cy, vertices: v, edges: e, rx: 0.4, ry: 0.1, rz: 0.2, spinSpeed: 0.009, label: 'OCTA // AGENT-Z' }
-    }
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('mouseleave', onMouseLeave)
+    window.addEventListener('resize', onResize)
 
-    // 3. Bauhaus Gyroscopic Rings (Multi-axis gimbal)
-    const createGyroscope = (cx, cy, cz, radius) => {
-      const segments = 16
-      const v = []
-      const e = []
-      // Ring 1 (XY plane)
-      for (let i = 0; i < segments; i++) {
-        const a = (i / segments) * Math.PI * 2
-        v.push([Math.cos(a) * radius, Math.sin(a) * radius, 0])
-        e.push([i, (i + 1) % segments])
-      }
-      // Ring 2 (XZ plane)
-      const offset2 = segments
-      for (let i = 0; i < segments; i++) {
-        const a = (i / segments) * Math.PI * 2
-        v.push([Math.cos(a) * radius * 0.8, 0, Math.sin(a) * radius * 0.8])
-        e.push([offset2 + i, offset2 + ((i + 1) % segments)])
-      }
-      return { cx, cy, cz, initialY: cy, vertices: v, edges: e, rx: 0.5, ry: 0.6, rz: 0, spinSpeed: 0.006, label: 'GIMBAL // STACK' }
-    }
+    // ── 6. Main Three.js Animation Loop ──
+    let animationFrameId
 
-    // 4. Geodesic Icosahedron
-    const createIcosahedron = (cx, cy, cz, size) => {
-      const phi = (1 + Math.sqrt(5)) / 2
-      const a = (size * 0.5) / Math.sqrt(1 + phi * phi)
-      const b = a * phi
-      const v = [
-        [-a, b, 0], [a, b, 0], [-a, -b, 0], [a, -b, 0],
-        [0, -a, b], [0, a, b], [0, -a, -b], [0, a, -b],
-        [b, 0, -a], [b, 0, a], [-b, 0, -a], [-b, 0, a]
-      ]
-      const e = [
-        [0, 11], [0, 5], [0, 1], [0, 7], [0, 10],
-        [1, 5], [1, 9], [1, 8], [1, 7],
-        [2, 11], [2, 10], [2, 6], [2, 3], [2, 4],
-        [3, 4], [3, 9], [3, 8], [3, 6],
-        [4, 11], [4, 5], [4, 9],
-        [5, 9],
-        [6, 10], [6, 7], [6, 8],
-        [7, 8],
-        [8, 9],
-        [10, 11]
-      ]
-      return { cx, cy, cz, initialY: cy, vertices: v, edges: e, rx: 0.1, ry: 0.4, rz: 0.3, spinSpeed: 0.008, label: 'ICOS // NODE-0' }
-    }
+    const animate = () => {
+      mouseNDC.x += (targetNDC.x - mouseNDC.x) * 0.1
+      mouseNDC.y += (targetNDC.y - mouseNDC.y) * 0.1
 
-    // Curated polyhedra positioned along the vertical scroll path
-    const shapes = isMobile
-      ? [
-          createTesseract(180, -180, 580, 85),
-          createOctahedron(-180, 280, 620, 90),
-        ]
-      : [
-          createTesseract(420, -220, 540, 110),
-          createOctahedron(-400, 20, 580, 105),
-          createGyroscope(380, 320, 520, 95),
-          createIcosahedron(-380, 640, 600, 110),
-        ]
-
-    // ── Floating Cyber Motes (3D particles) ──
-    const PARTICLE_COUNT = isMobile ? 30 : 65
-    const particles = []
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: (Math.random() - 0.5) * 1800,
-        y: (Math.random() - 0.5) * 2200,
-        z: Math.random() * 1200 + 80,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 1.6 + 0.8,
-        pulse: Math.random() * Math.PI * 2,
-      })
-    }
-
-    // ── Full-Height 3D Perspective Matrix (Floor & Ceiling Planes + Crosses) ──
-    // Grid spans the entire screen with interactive mouse repulsion & wave
-    const GRID_COLS = isMobile ? 12 : 20
-    const GRID_SPACING = isMobile ? 85 : 75
-    const GRID_DEPTH_START = 80
-    const GRID_DEPTH_END = 1100
-    const GRID_DEPTH_STEP = 55
-    let gridOffset = 0
-
-    // Main 60-120 FPS Render Loop
-    const render = () => {
-      ctx.clearRect(0, 0, width, height)
-
-      // Smooth interpolation for mouse tilt & coordinates
-      currentTiltX += (targetTiltX - currentTiltX) * 0.06
-      currentTiltY += (targetTiltY - currentTiltY) * 0.06
-      mouseX += (targetMouseX - mouseX) * 0.08
-      mouseY += (targetMouseY - mouseY) * 0.08
       scrollY += (targetScrollY - scrollY) * 0.08
 
-      // Screen Vanishing Point with Parallax
-      const originX = width / 2 + currentTiltX * 90
-      const originY = height / 2 + currentTiltY * 65
+      camera.position.x += (targetCameraX - camera.position.x) * 0.04
+      camera.position.y += (targetCameraY - (scrollY * 0.1 % 280) - camera.position.y) * 0.04
+      camera.lookAt(0, -(scrollY * 0.1 % 280), 0)
 
-      // Scroll-driven camera parallax for polyhedra
-      const scrollOffset = (scrollY * 0.35) % 2000
-
-      // ── 1. Cyber Cursor Ambient Light Field (Reacts to Mouse) ──
-      const mouseGrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 340)
-      mouseGrad.addColorStop(0, 'rgba(57, 255, 20, 0.12)')
-      mouseGrad.addColorStop(0.5, 'rgba(57, 255, 20, 0.03)')
-      mouseGrad.addColorStop(1, 'transparent')
-      ctx.fillStyle = mouseGrad
-      ctx.fillRect(0, 0, width, height)
-
-      // ── 2. Full-Screen 3D Cyber Matrix Planes (Floor + Upper Perspective Grid) ──
-      gridOffset = (gridOffset + 0.6) % GRID_DEPTH_STEP
-      ctx.save()
-      ctx.lineWidth = 1
-      ctx.strokeStyle = 'rgba(57, 255, 20, 0.08)'
-      ctx.beginPath()
-
-      // Longitudinal lines spanning full depth
-      const numLines = GRID_COLS
-      for (let i = -numLines; i <= numLines; i++) {
-        const xWorld = i * GRID_SPACING
-        const scaleNear = fov / GRID_DEPTH_START
-        const scaleFar = fov / GRID_DEPTH_END
-
-        // Lower matrix plane
-        const yFloorNear = 280 * scaleNear
-        const yFloorFar = 280 * scaleFar
-        ctx.moveTo(originX + xWorld * scaleNear, originY + yFloorNear)
-        ctx.lineTo(originX + xWorld * scaleFar, originY + yFloorFar)
-
-        // Upper matrix plane (giving full-page 3D room feel)
-        const yCeilNear = -280 * scaleNear
-        const yCeilFar = -280 * scaleFar
-        ctx.moveTo(originX + xWorld * scaleNear, originY + yCeilNear)
-        ctx.lineTo(originX + xWorld * scaleFar, originY + yCeilFar)
+      if (isMouseOnScreen) {
+        raycaster.setFromCamera(mouseNDC, camera)
+        raycaster.ray.intersectPlane(planeZ0, cursorWorld)
+      } else {
+        cursorWorld.set(9999, 9999, 0)
       }
 
-      // Transverse lines (sweeping forward through depth)
-      const halfW = (numLines + 1) * GRID_SPACING
-      for (let z = GRID_DEPTH_START + (gridOffset % GRID_DEPTH_STEP); z < GRID_DEPTH_END; z += GRID_DEPTH_STEP) {
-        const scale = fov / z
-        const yFloor = originY + 280 * scale
-        const yCeil = originY - 280 * scale
+      // Proportions of the "0" (zero) ellipse around cursor
+      const Rx = isMobile ? 55 : 72
+      const Ry = isMobile ? 85 : 115
+      const influenceRadius = 2.4
 
-        // Floor ring
-        ctx.moveTo(originX - halfW * scale, yFloor)
-        ctx.lineTo(originX + halfW * scale, yFloor)
-
-        // Ceiling ring
-        ctx.moveTo(originX - halfW * scale, yCeil)
-        ctx.lineTo(originX + halfW * scale, yCeil)
-      }
-      ctx.stroke()
-      ctx.restore()
-
-      // ── 3. Interactive Kinetic Mouse Proximity Grid Ticks ──
-      // Near the cursor, render bright neon '+' crosses that deflect slightly with mouse movement
-      ctx.save()
-      ctx.strokeStyle = 'rgba(57, 255, 20, 0.35)'
-      ctx.lineWidth = 1.2
-      ctx.beginPath()
-      const crossStep = isMobile ? 110 : 80
-      for (let gx = -GRID_COLS; gx <= GRID_COLS; gx += 2) {
-        for (let gz = GRID_DEPTH_START + 120; gz < 800; gz += crossStep) {
-          const scale = fov / gz
-          let sx = originX + (gx * GRID_SPACING) * scale
-          let sy = originY + 280 * scale
-
-          // Mouse kinetic reaction (warp/repulsion)
-          const dx = sx - mouseX
-          const dy = sy - mouseY
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 180) {
-            const force = (1 - dist / 180) * 16
-            sx += (dx / dist) * force
-            sy += (dy / dist) * force
-          }
-
-          if (sx > 0 && sx < width && sy > 0 && sy < height) {
-            const crossSize = 3.5
-            ctx.moveTo(sx - crossSize, sy)
-            ctx.lineTo(sx + crossSize, sy)
-            ctx.moveTo(sx, sy - crossSize)
-            ctx.lineTo(sx, sy + crossSize)
-          }
-        }
-      }
-      ctx.stroke()
-      ctx.restore()
-
-      // ── 4. Floating 3D Depth Motes (Cyber Dust) ──
-      ctx.save()
-      ctx.fillStyle = 'rgba(57, 255, 20, 0.55)'
-      ctx.beginPath()
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
-        p.z -= 0.65
-        p.x += p.vx
-        p.y += p.vy
-        p.pulse += 0.03
 
-        if (p.z <= 60) p.z = 1200
-        if (Math.abs(p.x) > 1000) p.x = (Math.random() - 0.5) * 800
-        if (Math.abs(p.y) > 1200) p.y = (Math.random() - 0.5) * 800
+        // Natural floating matrix drift
+        p.baseY += p.vy
+        p.baseX += p.vx
+        if (p.baseY > 480) p.baseY = -480
+        if (p.baseY < -480) p.baseY = 480
+        if (p.baseX > 580) p.baseX = -580
+        if (p.baseX < -580) p.baseX = 580
 
-        const scale = fov / p.z
-        let sx = originX + p.x * scale
-        let sy = originY + (p.y - (scrollY * 0.15)) * scale
+        // Distance from cursor on normalized "0" metric
+        const dx = p.currentX - cursorWorld.x
+        const dy = p.currentY - cursorWorld.y
+        const distEllipse = Math.sqrt((dx / Rx) * (dx / Rx) + (dy / Ry) * (dy / Ry))
 
-        // Wrap vertically
-        while (sy < -100) sy += height + 200
-        while (sy > height + 100) sy -= height + 200
+        if (isMouseOnScreen && distEllipse < influenceRadius) {
+          // DIRECTLY ON CURSOR (center hole of the 0, distEllipse < 0.6):
+          // HIDE completely so nothing concentrates or clumps on top of the cursor!
+          if (distEllipse < 0.6) {
+            p.currentOpacity += (0 - p.currentOpacity) * 0.3
+            // Part outward towards the 0 perimeter
+            const pushAngle = Math.atan2(dy, dx)
+            p.currentX += Math.cos(pushAngle) * 3
+            p.currentY += Math.sin(pushAngle) * 3
+          } else {
+            // ENVELOP INTO THE "0" PERIMETER:
+            // Calculate attraction factor toward the perimeter (peak at distEllipse = 1.0)
+            const envelopeFactor = Math.max(0, 1.0 - Math.abs(distEllipse - 1.0) / 1.3)
 
-        // Gentle mouse avoidance
-        const dx = sx - mouseX
-        const dy = sy - mouseY
-        const dist = Math.sqrt(dx * dx + dy * dy)
-        if (dist < 120) {
-          sx += (dx / dist) * 8
-          sy += (dy / dist) * 8
+            p.orbitOffset += p.orbitSpeed
+            const angle = Math.atan2(dy, dx) + p.orbitOffset * 0.05
+
+            const targetZeroX = cursorWorld.x + Rx * Math.cos(angle)
+            const targetZeroY = cursorWorld.y + Ry * Math.sin(angle)
+            const targetZeroZ = 15
+
+            // Smoothly draw onto the "0" outline
+            p.currentX += (targetZeroX - p.currentX) * (0.14 * envelopeFactor)
+            p.currentY += (targetZeroY - p.currentY) * (0.14 * envelopeFactor)
+            p.currentZ += (targetZeroZ - p.currentZ) * (0.14 * envelopeFactor)
+
+            // Dynamic glow on the 0 outline!
+            const targetOpacity = p.baseOpacity * (1 - envelopeFactor) + 0.75 * envelopeFactor
+            p.currentOpacity += (targetOpacity - p.currentOpacity) * 0.16
+          }
+        } else {
+          // Relax back to natural ambient floating position and opacity
+          p.currentOpacity += (p.baseOpacity - p.currentOpacity) * 0.06
+          p.currentX += (p.baseX - p.currentX) * 0.05
+          p.currentY += (p.baseY - p.currentY) * 0.05
+          p.currentZ += (p.baseZ - p.currentZ) * 0.05
         }
 
-        const rad = Math.max(0.6, (p.size + Math.sin(p.pulse) * 0.4) * scale)
-        ctx.moveTo(sx + rad, sy)
-        ctx.arc(sx, sy, rad, 0, Math.PI * 2)
+        p.sprite.position.set(p.currentX, p.currentY, p.currentZ)
+        p.sprite.material.opacity = Math.max(0, p.currentOpacity)
       }
-      ctx.fill()
-      ctx.restore()
 
-      // ── 5. Bauhaus 3D Polyhedra (Wireframe Solids across the Page) ──
-      shapes.forEach((s, idx) => {
-        // Continuous rotation + mouse influence
-        s.rx += s.spinSpeed
-        s.ry += s.spinSpeed * 1.3
-        s.rz += s.spinSpeed * 0.5
+      dotPoints.rotation.y += 0.0002
+      dotPoints.rotation.x += 0.0001
 
-        // Responsive position tied to scroll & idle bobbing
-        const time = Date.now() * 0.001
-        const bobY = s.initialY - (scrollOffset * 0.4) + Math.sin(time + idx * 2.2) * 22
-        const bobX = s.cx + Math.cos(time * 0.8 + idx) * 16
-
-        // Dynamic 3D rotation with mouse tilt
-        const effectiveRx = s.rx + currentTiltY * 0.5
-        const effectiveRy = s.ry + currentTiltX * 0.5
-
-        // Project all vertices
-        const projected = s.vertices.map(([vx, vy, vz]) => {
-          let [y1, z1] = rotateX(vy, vz, effectiveRx)
-          let [x2, z2] = rotateY(vx, z1, effectiveRy)
-          let [x3, y3] = rotateZ(x2, y1, s.rz)
-
-          const worldX = bobX + x3
-          const worldY = bobY + y3
-          const worldZ = s.cz + z2
-
-          const scale = fov / Math.max(10, worldZ)
-          return [originX + worldX * scale, originY + worldY * scale, worldZ, scale]
-        })
-
-        // Draw Wireframe Edges
-        ctx.save()
-        ctx.lineWidth = 1.2
-        ctx.strokeStyle = idx % 2 === 0 ? 'rgba(57, 255, 20, 0.42)' : 'rgba(57, 255, 20, 0.32)'
-        ctx.beginPath()
-        s.edges.forEach(([i1, i2]) => {
-          const v1 = projected[i1]
-          const v2 = projected[i2]
-          ctx.moveTo(v1[0], v1[1])
-          ctx.lineTo(v2[0], v2[1])
-        })
-        ctx.stroke()
-        ctx.restore()
-
-        // Draw Glowing Nodes at Vertices
-        ctx.save()
-        ctx.fillStyle = 'rgba(57, 255, 20, 0.85)'
-        ctx.beginPath()
-        projected.forEach(([px, py, pz, pScale]) => {
-          const nodeRad = Math.max(1.2, 2.2 * pScale)
-          ctx.moveTo(px + nodeRad, py)
-          ctx.arc(px, py, nodeRad, 0, Math.PI * 2)
-        })
-        ctx.fill()
-        ctx.restore()
-
-        // Tactical Bauhaus Coordinate Label on Shape Center
-        const centerScale = fov / s.cz
-        const scX = originX + bobX * centerScale
-        const scY = originY + bobY * centerScale
-        if (scX > 40 && scX < width - 40 && scY > 40 && scY < height - 40) {
-          ctx.save()
-          ctx.font = '10px "DM Mono", monospace'
-          ctx.fillStyle = 'rgba(57, 255, 20, 0.45)'
-          ctx.fillText(`+ ${s.label}`, scX + 22, scY - 14)
-          ctx.strokeStyle = 'rgba(57, 255, 20, 0.22)'
-          ctx.lineWidth = 0.8
-          ctx.beginPath()
-          ctx.moveTo(scX, scY)
-          ctx.lineTo(scX + 18, scY - 14)
-          ctx.lineTo(scX + 80, scY - 14)
-          ctx.stroke()
-          ctx.restore()
-        }
-      })
-
-      animationFrameId = requestAnimationFrame(render)
+      renderer.render(scene, camera)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
-    render()
+    animate()
 
+    // ── 7. Cleanup on Unmount ──
     return () => {
       cancelAnimationFrame(animationFrameId)
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      window.removeEventListener('resize', onResize)
+
+      textures.forEach((tex) => tex.dispose())
+      materials.forEach((mat) => mat.dispose())
+      particles.forEach((p) => p.sprite.material.dispose())
+      dotGeometry.dispose()
+      dotMaterial.dispose()
+      renderer.dispose()
     }
   }, [])
 
   return (
     <div className="three-d-background-root" aria-hidden="true">
       <canvas ref={canvasRef} className="three-d-canvas" />
-      <div className="three-d-ambient-glow" />
       <div className="three-d-vignette" />
     </div>
   )

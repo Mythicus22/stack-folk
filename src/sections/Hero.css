@@ -1,173 +1,176 @@
+/* ── Hero Section (Normal 100vh, zero empty space below) ── */
 .hero {
   min-height: 100vh;
-  padding-top: 80px;
+  padding-top: 100px;
+  padding-bottom: 60px;
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   background: transparent;
 }
 
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.55;
-}
-
-/* ── Geometric Decorations ── */
-.hero__geo {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero__geo--ring {
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  border: 1px solid rgba(57, 255, 20, 0.15);
-  top: -80px;
-  right: -80px;
-  animation: spin-slow 50s linear infinite;
-}
-
-.hero__geo--ring::before {
-  content: '';
-  position: absolute;
-  inset: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(57, 255, 20, 0.08);
-}
-
-.hero__geo--square {
-  width: 120px;
-  height: 120px;
-  border: 1.5px solid rgba(57, 255, 20, 0.22);
-  bottom: 20%;
-  left: 5%;
-  animation: float 12s ease-in-out infinite;
-}
-
-.hero__geo--dot {
-  width: 60px;
-  height: 60px;
-  background: var(--green);
-  border-radius: 50%;
-  bottom: 30%;
-  right: 8%;
-  box-shadow: 0 0 50px rgba(57, 255, 20, 0.45);
-  animation: pulse-glow 4.5s ease-in-out infinite;
-}
-
-/* ── Container ── */
 .hero__container {
   position: relative;
   z-index: 2;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  flex: 1;
+  width: 100%;
+}
+
+/* ── 2-Column Split Grid ── */
+.hero__split-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+}
+
+/* ── Left Column ── */
+.hero__left {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 20px;
 }
 
-.hero__label {
-  margin-bottom: -16px;
+.hero__status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(57, 255, 20, 0.08);
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  text-transform: uppercase;
+  width: fit-content;
+  border-radius: 2px;
 }
 
-/* ── Headline ── */
-.hero__headline {
-  overflow: hidden;
+.hero__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse-glow 2.5s infinite ease-in-out;
 }
 
-.hero__headline-line {
-  overflow: hidden;
-  line-height: 0.9;
+/* ── Enlarged Stackfolk Logo (No Black BG, Cyber Aura & Floating Animation) ── */
+.hero__logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  margin: 4px 0;
+  animation: float 6s ease-in-out infinite;
 }
 
-.hero__headline-line span {
+.hero__logo-aura {
+  position: absolute;
+  inset: -15px -25px;
+  background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.22) 0%, rgba(57, 255, 20, 0.05) 45%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: glow-breathe 4s infinite ease-in-out;
+}
+
+.hero__stackfolk-logo {
+  width: 100%;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
   display: block;
+  filter: contrast(1.15) brightness(1.1) drop-shadow(0 0 24px rgba(57, 255, 20, 0.45));
+  will-change: transform;
+  transition: filter 0.3s ease;
+}
+
+.hero__stackfolk-logo:hover {
+  filter: contrast(1.2) brightness(1.15) drop-shadow(0 0 32px rgba(57, 255, 20, 0.7));
+}
+
+/* ── Tagline & Description ── */
+.hero__tagline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero__tagline-text {
   font-family: var(--font-display);
-  font-size: clamp(80px, 14vw, 200px);
-  line-height: 0.9;
+  font-size: clamp(38px, 5.2vw, 68px);
+  line-height: 0.95;
   color: var(--white);
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
-.hero__headline-line--accent span {
+.hero__tagline-accent {
   color: transparent;
-  -webkit-text-stroke: 2px var(--white);
-  position: relative;
+  -webkit-text-stroke: 1.5px var(--green);
+  text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
 }
 
-.hero__headline-line--accent span::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--green) 0%, transparent 60%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-stroke: 0;
+.hero__description {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--gray-300);
+  max-width: 520px;
+  margin: 0;
 }
 
-/* ── Sub content ── */
-.hero__sub {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 60px;
-  align-items: start;
-}
-
-.hero__description p {
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--gray-200);
-  max-width: 480px;
-  margin-bottom: 12px;
-}
-
-.hero__sub-note {
-  font-family: var(--font-mono) !important;
-  font-size: 12px !important;
-  color: var(--gray-400) !important;
-  letter-spacing: 0.05em;
-  margin-top: 8px !important;
-}
-
-.hero__buttons {
+.hero__actions {
   display: flex;
+  align-items: center;
   gap: 16px;
-  margin-top: 32px;
   flex-wrap: wrap;
+  margin-top: 8px;
 }
 
-/* ── Event Card ── */
+/* ── Right Column: 3D Video Frame Animation + Zero-Hack Event Card ── */
+.hero__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.hero__3d-container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* ── Beautiful Zero-Hack Event Card ── */
 .hero__event-card {
-  width: 340px;
-  flex-shrink: 0;
+  width: 100%;
+  max-width: 420px;
   background: var(--green);
   color: var(--black);
-  padding: 28px;
+  padding: 24px 28px;
   position: relative;
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .hero__event-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(57, 255, 20, 0.4);
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 18px 50px rgba(57, 255, 20, 0.45);
 }
 
 .hero__event-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .hero__event-tag {
@@ -199,32 +202,31 @@
 
 .hero__event-title {
   font-family: var(--font-display);
-  font-size: 52px;
+  font-size: 42px;
   line-height: 0.95;
   letter-spacing: -0.01em;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .hero__event-subtitle {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   opacity: 0.8;
 }
 
 .hero__event-badge {
-  width: 80px;
-  height: 80px;
+  width: 68px;
+  height: 68px;
   background: var(--black);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
   position: absolute;
-  right: 28px;
-  top: 80px;
+  right: 24px;
+  top: 60px;
 }
 
 .hero__event-badge-inner {
@@ -244,20 +246,20 @@
 }
 
 .hero__event-desc {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
   opacity: 0.85;
-  margin-bottom: 20px;
-  max-width: 200px;
+  margin-bottom: 16px;
+  max-width: 280px;
 }
 
 .hero__event-details {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border-top: 1px solid rgba(0,0,0,0.2);
-  padding-top: 16px;
-  margin-bottom: 24px;
+  gap: 8px;
+  border-top: 1px solid rgba(0,0,0,0.18);
+  padding-top: 12px;
+  margin-bottom: 18px;
 }
 
 .hero__event-detail {
@@ -272,9 +274,9 @@
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.55;
   min-width: 52px;
-  padding-top: 2px;
+  padding-top: 1px;
 }
 
 .hero__event-cta {
@@ -283,139 +285,63 @@
   justify-content: space-between;
   background: var(--black);
   color: var(--green);
-  padding: 14px 18px;
+  padding: 12px 18px;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.03em;
-  transition: all 0.3s ease;
-  width: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .hero__event-cta:hover {
-  background: var(--gray-800);
-  transform: translateX(4px);
-}
-
-/* ── Scroll indicator ── */
-.hero__scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  z-index: 2;
-}
-
-.hero__scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--green), transparent);
-  animation: float 2s ease-in-out infinite;
-}
-
-.hero__scroll span {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gray-400);
+  background: #111;
+  color: var(--white);
 }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .hero {
-    min-height: auto;
-    padding-top: 70px;
-    padding-bottom: 40px;
+    padding-top: 80px;
   }
 
-  .hero__container {
-    padding-top: 36px;
-    padding-bottom: 36px;
+  .hero__split-grid {
+    grid-template-columns: 1fr;
     gap: 36px;
   }
 
-  .hero__sub {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .hero__right {
+    max-width: 500px;
+    margin: 0 auto;
   }
 
-  .hero__event-card {
-    width: 100%;
-    max-width: 100%;
+  .hero__stackfolk-logo {
+    max-height: 80px;
   }
 
-  .hero__scroll {
-    display: none;
+  .hero__tagline-text {
+    font-size: clamp(32px, 8vw, 48px);
   }
 }
 
 @media (max-width: 600px) {
-  .hero__headline-line span {
-    font-size: clamp(52px, 16vw, 90px);
-    line-height: 0.92;
+  .hero {
+    padding-top: 70px;
   }
 
-  .hero__description p {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .hero__buttons {
+  .hero__actions {
     flex-direction: column;
     width: 100%;
+    align-items: stretch;
   }
 
-  .hero__buttons .btn-primary,
-  .hero__buttons .btn-outline {
+  .hero__actions .btn-primary,
+  .hero__actions .btn-outline {
     width: 100%;
     justify-content: center;
   }
 
-  .hero__geo--ring {
-    width: 220px;
-    height: 220px;
-    right: -40px;
-    top: -40px;
-    opacity: 0.35;
-  }
-
-  .hero__geo--square,
-  .hero__geo--dot {
-    display: none;
-  }
-
-  .hero__event-card {
-    padding: 22px 18px;
-  }
-
-  .hero__event-title {
-    font-size: clamp(38px, 10vw, 46px);
-  }
-
-  .hero__event-badge {
-    width: 66px;
-    height: 66px;
-    right: 18px;
-    top: 20px;
-  }
-}
-
-@media (max-width: 380px) {
-  .hero__headline-line span {
-    font-size: clamp(42px, 13vw, 52px);
-  }
-
   .hero__event-badge {
     position: static;
-    margin-bottom: 16px;
-  }
-
-  .hero__event-desc {
-    max-width: 100%;
+    margin-bottom: 14px;
   }
 }

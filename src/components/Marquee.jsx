@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import './Marquee.css'
 
 const items = ['HACK', 'SHIP', 'LEARN', 'REPEAT']
