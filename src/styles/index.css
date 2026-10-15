@@ -39,83 +39,122 @@ body {
   cursor: none;
 }
 
-/* ── Custom Cursor ── */
-.cursor {
+/* ── Cyber Reticle Target Cursor ── */
+.cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   background: var(--green);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  mix-blend-mode: difference;
-  margin-top: -4px;
-  margin-left: -4px;
+  margin-top: -2.5px;
+  margin-left: -2.5px;
   will-change: transform;
   transform: translate3d(-100px, -100px, 0);
   opacity: 0;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              margin 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.2s ease;
+  box-shadow: 0 0 8px var(--green);
+  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, background-color 0.2s ease;
 }
 
-.cursor--hover {
-  width: 18px;
-  height: 18px;
-  margin-top: -9px;
-  margin-left: -9px;
-  background: var(--green);
-  box-shadow: 0 0 16px var(--green-glow);
+.cursor-dot.cursor--lock {
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  margin-left: -3.5px;
+  background: var(--white);
+  box-shadow: 0 0 12px var(--green);
 }
 
-.cursor--click {
-  width: 4px;
-  height: 4px;
-  margin-top: -2px;
-  margin-left: -2px;
-}
-
-.cursor-follower {
+.cursor-reticle {
   position: fixed;
   top: 0;
   left: 0;
-  width: 42px;
-  height: 42px;
-  border: 1.5px solid var(--green);
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   pointer-events: none;
   z-index: 99998;
-  margin-top: -21px;
-  margin-left: -21px;
+  margin-top: -16px;
+  margin-left: -16px;
   will-change: transform;
   transform: translate3d(-100px, -100px, 0);
   opacity: 0;
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              margin 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease,
-              background-color 0.3s ease,
-              opacity 0.25s ease;
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cursor-follower--hover {
-  width: 72px;
-  height: 72px;
-  margin-top: -36px;
-  margin-left: -36px;
-  border-color: rgba(57, 255, 20, 0.8);
-  background: rgba(57, 255, 20, 0.04);
+.reticle-corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--green);
+  border-style: solid;
+  transition: border-color 0.25s ease, width 0.25s ease, height 0.25s ease;
 }
 
-.cursor-follower--click {
-  width: 32px;
-  height: 32px;
-  margin-top: -16px;
-  margin-left: -16px;
-  border-color: var(--white);
+.reticle-corner--tl {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.reticle-corner--tr {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.reticle-corner--bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.reticle-corner--br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+.cursor-reticle.reticle--lock {
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  margin-left: -26px;
+}
+
+.cursor-reticle.reticle--lock .reticle-corner {
+  width: 10px;
+  height: 10px;
+  border-color: #ffffff;
+  filter: drop-shadow(0 0 6px var(--green));
+}
+
+.cursor-reticle.reticle--active {
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+}
+
+.cursor-reticle.reticle--active .reticle-corner {
+  border-color: var(--green);
+}
+
+/* ── Touch screen cursor handling ── */
+@media (pointer: coarse), (hover: none), (max-width: 768px) {
+  body {
+    cursor: auto !important;
+  }
+  .cursor-dot, .cursor-reticle {
+    display: none !important;
+  }
+  button, a {
+    cursor: pointer !important;
+  }
 }
 
 /* ── Scrollbar ── */
@@ -128,6 +167,7 @@ h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   line-height: 0.95;
   letter-spacing: -0.01em;
+  overflow-wrap: break-word;
 }
 
 p, span, a, button, li {
@@ -150,11 +190,13 @@ button {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
+  width: 100%;
 }
 
 .section {
   padding: 120px 0;
   position: relative;
+  overflow: hidden;
 }
 
 .green { color: var(--green); }
@@ -278,19 +320,18 @@ button {
 
 /* ── Card Base ── */
 .card {
-  background: rgba(22, 22, 22, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #131613;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 32px;
   position: relative;
-  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  will-change: transform;
 }
 
 .card:hover {
   border-color: var(--green);
-  transform: translateY(-8px) scale(1.015);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--green-glow);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px var(--green-glow);
 }
 
 .card::before {
@@ -299,7 +340,7 @@ button {
   inset: 0;
   background: linear-gradient(135deg, var(--green-glow), transparent 70%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
   pointer-events: none;
 }
 
@@ -459,10 +500,6 @@ main > * {
   animation: page-fade-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-main > * {
-  animation: page-fade-in 0.6s ease both;
-}
-
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .container { padding: 0 24px; }
@@ -472,4 +509,17 @@ main > * {
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
   .section { padding: 60px 0; }
+  .card { padding: 24px 20px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .section { padding: 48px 0; }
+  .card { padding: 20px 16px; }
+  .stat-number { font-size: clamp(42px, 14vw, 64px); }
+}
+
+@media (max-width: 360px) {
+  .container { padding: 0 12px; }
+  .section { padding: 40px 0; }
 }

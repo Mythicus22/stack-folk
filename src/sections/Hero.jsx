@@ -1,70 +1,9 @@
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import './Hero.css'
 
 const words = ['HACK', 'SHIP', 'LEARN', 'REPEAT']
 
 export default function Hero() {
-  const canvasRef = useRef(null)
-
-  // Particle grid effect
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let animId
-    let particles = []
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-      initParticles()
-    }
-
-    const initParticles = () => {
-      particles = []
-      const cols = Math.floor(canvas.width / 60)
-      const rows = Math.floor(canvas.height / 60)
-      for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-          particles.push({
-            x: (i / cols) * canvas.width + 30,
-            y: (j / rows) * canvas.height + 30,
-            baseX: (i / cols) * canvas.width + 30,
-            baseY: (j / rows) * canvas.height + 30,
-            size: Math.random() * 1.5 + 0.5,
-            opacity: Math.random() * 0.3 + 0.05,
-            speed: Math.random() * 0.5 + 0.2,
-            offset: Math.random() * Math.PI * 2,
-          })
-        }
-      }
-    }
-
-    let t = 0
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      t += 0.008
-      particles.forEach(p => {
-        p.x = p.baseX + Math.sin(t * p.speed + p.offset) * 8
-        p.y = p.baseY + Math.cos(t * p.speed * 0.7 + p.offset) * 5
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(57, 255, 20, ${p.opacity})`
-        ctx.fill()
-      })
-      animId = requestAnimationFrame(animate)
-    }
-
-    resize()
-    animate()
-    window.addEventListener('resize', resize)
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
   const containerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.18 } }
@@ -82,8 +21,6 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
-      {/* Particle canvas */}
-      <canvas ref={canvasRef} className="hero__canvas" />
 
       {/* Geometric decorations */}
       <motion.div

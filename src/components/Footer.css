@@ -1,7 +1,5 @@
 .footer {
-  background: rgba(8, 8, 8, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(9, 11, 9, 0.75);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 80px 0 0;
 }
@@ -147,14 +145,24 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .footer {
+    padding: 48px 0 0;
+  }
+
+  .footer__container {
+    gap: 36px;
+  }
+
   .footer__top {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .footer__bottom {
     flex-direction: column;
     gap: 16px;
     text-align: center;
+    padding: 24px 0;
   }
 }

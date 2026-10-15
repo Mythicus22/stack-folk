@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import './Program.css'
 
 const programs = [
@@ -26,11 +25,11 @@ const programs = [
   },
 ]
 
-export default function Program() {
-  const { ref, inView } = useInView(0.1)
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
+export default function Program() {
   return (
-    <section className="program section" id="program" ref={ref}>
+    <section className="program section" id="program">
       {/* Background accent */}
       <div className="program__bg" />
 
@@ -38,8 +37,9 @@ export default function Program() {
         <motion.div
           className="label"
           initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           02 / THE PROGRAM
         </motion.div>
@@ -47,9 +47,10 @@ export default function Program() {
         <div className="program__header">
           <motion.h2
             className="program__headline"
-            initial={{ opacity: 0, y: 70 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 55 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             Short sprints.
             <br />
@@ -58,9 +59,10 @@ export default function Program() {
 
           <motion.p
             className="program__sub"
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             Every format is designed to push you past the planning stage
             and into the thing that actually exists.
@@ -72,9 +74,10 @@ export default function Program() {
             <motion.div
               key={p.num}
               className="program__card"
-              initial={{ opacity: 0, y: 70 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.3 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 55 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 1.0, delay: 0.15 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -10, transition: { duration: 0.35 } }}
             >
               <div className="program__card-top">
@@ -92,9 +95,10 @@ export default function Program() {
         {/* Banner strip */}
         <motion.div
           className="program__banner"
-          initial={{ opacity: 0, scaleX: 0.85 }}
-          animate={inView ? { opacity: 1, scaleX: 1 } : {}}
-          transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, scaleX: 0.9 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={vp}
+          transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <span>ZERO-HACK IS WHERE WE START.</span>
           <a href="#join" className="program__banner-link">

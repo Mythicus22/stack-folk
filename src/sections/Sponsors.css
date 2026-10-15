@@ -1,7 +1,5 @@
 .sponsors {
-  background: rgba(10, 10, 10, 0.70);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: transparent;
   position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -39,7 +37,7 @@
 }
 
 .sponsors__tier-label {
-  background: rgba(14, 14, 14, 0.85);
+  background: #141714;
   padding: 16px 20px;
   font-family: var(--font-mono);
   font-size: 10px;
@@ -49,15 +47,14 @@
 }
 
 .sponsors__slot {
-  background: rgba(20, 20, 20, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: #111411;
   padding: 28px 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   border: 1px solid transparent;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
   cursor: none;
   flex: 1;
 }
@@ -105,6 +102,26 @@
 @media (max-width: 900px) {
   .sponsors__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .sponsors__headline {
+    font-size: clamp(32px, 8.5vw, 48px);
+    margin: 16px 0;
+  }
+
+  .sponsors__sub {
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+
+  .sponsors__slot {
+    padding: 20px 16px;
+  }
+
+  .sponsors__slot-abbr {
+    font-size: 26px;
   }
 }
 

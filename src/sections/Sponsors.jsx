@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import './Sponsors.css'
 
 const sponsorTiers = [
@@ -33,26 +32,28 @@ const sponsorTiers = [
   },
 ]
 
-export default function Sponsors() {
-  const { ref, inView } = useInView(0.1)
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
+export default function Sponsors() {
   return (
-    <section className="sponsors section" id="sponsors" ref={ref}>
+    <section className="sponsors section" id="sponsors">
       <div className="container">
         <motion.div
           className="label"
           initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           03 / PARTNERS
         </motion.div>
 
         <motion.h2
           className="sponsors__headline"
-          initial={{ opacity: 0, y: 70 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 55 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           Built with people
           <br />
@@ -61,9 +62,10 @@ export default function Sponsors() {
 
         <motion.p
           className="sponsors__sub"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           We partner with ecosystems, studios, and teams who want to help ambitious work get made.
         </motion.p>
@@ -75,8 +77,9 @@ export default function Sponsors() {
               <motion.div
                 className="sponsors__tier-label"
                 initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.9, delay: 0.3 + ti * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileInView={{ opacity: 1 }}
+                viewport={vp}
+                transition={{ duration: 0.8, delay: 0.15 + ti * 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
                 {tier.tier}
               </motion.div>
@@ -85,8 +88,9 @@ export default function Sponsors() {
                   key={s.name}
                   className="sponsors__slot"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.9, delay: 0.4 + (ti * 2 + si) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={vp}
+                  transition={{ duration: 0.8, delay: 0.2 + (ti * 2 + si) * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ borderColor: 'rgba(57,255,20,0.5)', y: -6, transition: { duration: 0.3 } }}
                 >
                   <div className="sponsors__slot-abbr">{s.abbr}</div>
@@ -101,8 +105,9 @@ export default function Sponsors() {
           href="#contact"
           className="sponsors__cta"
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.0, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           Become a sponsor →
         </motion.a>

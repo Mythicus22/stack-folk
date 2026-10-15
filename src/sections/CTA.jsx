@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import './CTA.css'
 
-export default function CTA() {
-  const { ref, inView } = useInView(0.15)
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
+export default function CTA() {
   return (
-    <section className="cta-section" id="join" ref={ref}>
+    <section className="cta-section" id="join">
       {/* Glitch text background */}
       <div className="cta__bg-text" aria-hidden>MAKE</div>
 
@@ -16,17 +15,19 @@ export default function CTA() {
         <motion.div
           className="label"
           initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           STACKFOLK / GET STARTED
         </motion.div>
 
         <motion.h2
           className="cta__headline"
-          initial={{ opacity: 0, y: 90 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 65 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           MAKE SOMETHING
           <br />
@@ -35,9 +36,10 @@ export default function CTA() {
 
         <motion.p
           className="cta__sub"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           The next good idea probably needs a room, a deadline,
           and a few good people.
@@ -45,9 +47,10 @@ export default function CTA() {
 
         <motion.div
           className="cta__buttons"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <a href="#" className="btn-primary cta__btn-main">
             <span>Join Stackfolk</span>
@@ -64,8 +67,9 @@ export default function CTA() {
         <motion.div
           className="cta__ring"
           initial={{ scale: 0, opacity: 0 }}
-          animate={inView ? { scale: 1, opacity: 1 } : {}}
-          transition={{ duration: 1.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={vp}
+          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
     </section>

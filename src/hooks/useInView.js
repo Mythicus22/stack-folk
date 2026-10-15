@@ -1,20 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function useInView(threshold = 0.15) {
+export function useInView(threshold = 0.12) {
   const ref = useRef(null)
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
+        // Toggles inView whenever entering or leaving the viewport!
+        // This ensures animations trigger every time you scroll to them.
+        setInView(entry.isIntersecting)
       },
-      { threshold }
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -50px 0px' // Triggers when the section is visibly 50px inside viewport
+      }
     )
-    if (ref.current) observer.observe(ref.current)
+
+    observer.observe(el)
     return () => observer.disconnect()
   }, [threshold])
 
@@ -26,7 +32,10 @@ export function useCounter(end, duration = 2000, start = false) {
   const rafRef = useRef(null)
 
   useEffect(() => {
-    if (!start) return
+    if (!start) {
+      setCount(0)
+      return
+    }
     const startTime = performance.now()
     const step = (now) => {
       const elapsed = now - startTime

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import './WhyStackfolk.css'
 
 const pillars = [
@@ -41,37 +40,40 @@ const pillars = [
   },
 ]
 
-export default function WhyStackfolk() {
-  const { ref, inView } = useInView(0.1)
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
+export default function WhyStackfolk() {
   return (
-    <section className="why section" id="community" ref={ref}>
+    <section className="why section" id="community">
       <div className="container">
         <div className="why__grid">
           <div className="why__left">
             <motion.div
               className="label"
               initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               01 / WHY STACKFOLK
             </motion.div>
 
             <motion.h2
               className="why__headline"
-              initial={{ opacity: 0, y: 70 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 55 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               The stack is better when the people are.
             </motion.h2>
 
             <motion.p
               className="why__desc"
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               Stackfolk is where technical talent meets momentum. We create spaces to make,
               share, challenge, and keep going — long after the demo ends.
@@ -84,8 +86,9 @@ export default function WhyStackfolk() {
                   key={label}
                   className="why__stat"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.9, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={vp}
+                  transition={{ duration: 0.8, delay: 0.25 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="why__stat-num">{num}</div>
                   <div className="why__stat-label">{label}</div>
@@ -96,9 +99,10 @@ export default function WhyStackfolk() {
             <motion.a
               href="#join"
               className="why__cta-circle"
-              initial={{ scale: 0, rotate: -30 }}
-              animate={inView ? { scale: 1, rotate: 0 } : {}}
-              transition={{ duration: 1.0, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ scale: 0, rotate: -25 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ scale: 1.14, rotate: 8, transition: { duration: 0.3 } }}
             >
               <span>JOIN</span>
@@ -112,9 +116,10 @@ export default function WhyStackfolk() {
               <motion.div
                 key={p.num}
                 className="why__pillar card"
-                initial={{ opacity: 0, x: 60 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 1.2, delay: 0.3 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, x: 45 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={vp}
+                transition={{ duration: 0.9, delay: 0.15 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ x: 6, transition: { duration: 0.3 } }}
               >
                 <div className="why__pillar-top">

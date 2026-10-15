@@ -2,80 +2,86 @@ import { useEffect, useRef } from 'react'
 
 export function useCursor() {
   const cursorRef = useRef(null)
-  const followerRef = useRef(null)
+  const reticleRef = useRef(null)
 
   useEffect(() => {
+    // Disable custom cursor entirely on touch devices / mobile screens
+    if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768) {
+      return
+    }
+
     const dot = cursorRef.current
-    const follower = followerRef.current
-    if (!dot || !follower) return
+    const reticle = reticleRef.current
+    if (!dot || !reticle) return
 
     let mouseX = -100
     let mouseY = -100
-    let followerX = -100
-    let followerY = -100
+    let reticleX = -100
+    let reticleY = -100
     let isVisible = false
+    let isHovering = false
     let rafId = null
 
-    // Direct GPU-accelerated update without layout reflow
     const onMouseMove = (e) => {
       mouseX = e.clientX
       mouseY = e.clientY
 
       if (!isVisible) {
         isVisible = true
-        followerX = mouseX
-        followerY = mouseY
+        reticleX = mouseX
+        reticleY = mouseY
         dot.style.opacity = '1'
-        follower.style.opacity = '0.6'
+        reticle.style.opacity = '1'
       }
 
-      // Dot moves instantly with zero latency
+      // Zero-lag dot positioning
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
     }
 
-    // Smooth physics-damped follower ring (factor 0.20 for responsive smoothness without lag)
+    // Smooth physics damping for the reticle
     const animate = () => {
       if (isVisible) {
-        followerX += (mouseX - followerX) * 0.20
-        followerY += (mouseY - followerY) * 0.20
-        follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`
+        const factor = isHovering ? 0.35 : 0.22
+        reticleX += (mouseX - reticleX) * factor
+        reticleY += (mouseY - reticleY) * factor
+        reticle.style.transform = `translate3d(${reticleX}px, ${reticleY}px, 0)`
       }
       rafId = requestAnimationFrame(animate)
     }
     rafId = requestAnimationFrame(animate)
 
-    // Document-level event delegation for hover states — zero missed elements and zero lag
+    // Interactive target lock-on on hover
     const onMouseOver = (e) => {
-      const interactive = e.target.closest('a, button, .card, [data-cursor], input, textarea, select, .btn-primary, .btn-outline, .faq__question')
-      if (interactive) {
-        dot.classList.add('cursor--hover')
-        follower.classList.add('cursor-follower--hover')
+      const target = e.target.closest('a, button, .card, input, select, textarea, [data-cursor], .clickable, .faq__question, .program__card, .why__pillar')
+      if (target) {
+        isHovering = true
+        dot.classList.add('cursor--lock')
+        reticle.classList.add('reticle--lock')
       } else {
-        dot.classList.remove('cursor--hover')
-        follower.classList.remove('cursor-follower--hover')
+        isHovering = false
+        dot.classList.remove('cursor--lock')
+        reticle.classList.remove('reticle--lock')
       }
     }
 
     const onMouseDown = () => {
-      dot.classList.add('cursor--click')
-      follower.classList.add('cursor-follower--click')
+      reticle.classList.add('reticle--active')
     }
 
     const onMouseUp = () => {
-      dot.classList.remove('cursor--click')
-      follower.classList.remove('cursor-follower--click')
+      reticle.classList.remove('reticle--active')
     }
 
     const onMouseLeaveDoc = () => {
       isVisible = false
       dot.style.opacity = '0'
-      follower.style.opacity = '0'
+      reticle.style.opacity = '0'
     }
 
     const onMouseEnterDoc = () => {
       isVisible = true
       dot.style.opacity = '1'
-      follower.style.opacity = '0.6'
+      reticle.style.opacity = '1'
     }
 
     window.addEventListener('mousemove', onMouseMove, { passive: true })
@@ -96,5 +102,5 @@ export function useCursor() {
     }
   }, [])
 
-  return { cursorRef, followerRef }
+  return { cursorRef, followerRef: reticleRef }
 }

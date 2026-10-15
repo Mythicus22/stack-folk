@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import { Plus, Minus } from 'lucide-react'
 import './FAQ.css'
 
@@ -27,28 +26,31 @@ const faqs = [
   },
 ]
 
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
+
 export default function FAQ() {
-  const { ref, inView } = useInView(0.1)
   const [open, setOpen] = useState(null)
 
   return (
-    <section className="faq section" ref={ref}>
+    <section className="faq section">
       <div className="container">
         <div className="faq__grid">
           <div className="faq__left">
             <motion.div
               className="label"
               initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               05 / FAQ
             </motion.div>
             <motion.h2
               className="faq__headline"
-              initial={{ opacity: 0, y: 70 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 55 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               Questions?
               <br />
@@ -62,8 +64,9 @@ export default function FAQ() {
                 key={i}
                 className={`faq__item ${open === i ? 'faq__item--open' : ''}`}
                 initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.9, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={vp}
+                transition={{ duration: 0.8, delay: 0.12 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
                 <button
                   className="faq__question"
@@ -81,7 +84,7 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <p>{item.a}</p>
                     </motion.div>

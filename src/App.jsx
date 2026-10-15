@@ -19,9 +19,14 @@ export default function App() {
 
   return (
     <>
-      {/* Custom High-Performance Cursor */}
-      <div ref={cursorRef} className="cursor" />
-      <div ref={followerRef} className="cursor-follower" />
+      {/* Precision Cyber Reticle Cursor */}
+      <div ref={cursorRef} className="cursor-dot" aria-hidden="true" />
+      <div ref={followerRef} className="cursor-reticle" aria-hidden="true">
+        <span className="reticle-corner reticle-corner--tl" />
+        <span className="reticle-corner reticle-corner--tr" />
+        <span className="reticle-corner reticle-corner--bl" />
+        <span className="reticle-corner reticle-corner--br" />
+      </div>
 
       {/* Whole-page 3D Background */}
       <ThreeDBackground />

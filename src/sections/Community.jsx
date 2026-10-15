@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import './Community.css'
 
 const channels = [
@@ -51,11 +50,11 @@ const channels = [
   },
 ]
 
-export default function Community() {
-  const { ref, inView } = useInView(0.1)
+const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
+export default function Community() {
   return (
-    <section className="community section" id="about" ref={ref}>
+    <section className="community section" id="about">
       <div className="container">
         <div className="community__grid">
           {/* Left */}
@@ -63,17 +62,19 @@ export default function Community() {
             <motion.div
               className="label"
               initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               04 / JOIN THE SIGNAL
             </motion.div>
 
             <motion.h2
               className="community__headline"
-              initial={{ opacity: 0, y: 70 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 55 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               No spectators.
               <br />
@@ -82,9 +83,10 @@ export default function Community() {
 
             <motion.p
               className="community__desc"
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               Join the signal: find collaborators, share work-in-progress, get
               feedback, and show up for the next build.
@@ -93,9 +95,10 @@ export default function Community() {
             {/* Participation tags */}
             <motion.div
               className="community__tags"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.0, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               {['Developers', 'Designers', 'Founders', 'Curious Minds'].map((tag) => (
                 <span key={tag} className="community__tag">{tag}</span>
@@ -110,9 +113,10 @@ export default function Community() {
                 key={ch.label}
                 href={ch.link}
                 className="community__channel card"
-                initial={{ opacity: 0, scale: 0.92, y: 30 }}
-                animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-                transition={{ duration: 1.1, delay: 0.35 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, scale: 0.94, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={vp}
+                transition={{ duration: 0.9, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ scale: 1.03, y: -6, transition: { duration: 0.3 } }}
               >
                 <div className="community__channel-top">
