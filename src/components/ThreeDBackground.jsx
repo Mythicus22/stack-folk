@@ -163,6 +163,22 @@ export default function ThreeDBackground() {
       targetCameraY = targetNDC.y * 30
     }
 
+    const onTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        isMouseOnScreen = true
+        const touch = e.touches[0]
+        targetNDC.x = (touch.clientX / window.innerWidth) * 2 - 1
+        targetNDC.y = -(touch.clientY / window.innerHeight) * 2 + 1
+
+        targetCameraX = targetNDC.x * 35
+        targetCameraY = targetNDC.y * 25
+      }
+    }
+
+    const onTouchEnd = () => {
+      isMouseOnScreen = false
+    }
+
     const onScroll = () => {
       targetScrollY = window.scrollY || 0
     }
@@ -185,6 +201,9 @@ export default function ThreeDBackground() {
     }
 
     window.addEventListener('mousemove', onMouseMove, { passive: true })
+    window.addEventListener('touchstart', onTouchMove, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('touchend', onTouchEnd, { passive: true })
     window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('mouseleave', onMouseLeave)
     window.addEventListener('resize', onResize)
@@ -285,6 +304,9 @@ export default function ThreeDBackground() {
     return () => {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('touchstart', onTouchMove)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('touchend', onTouchEnd)
       window.removeEventListener('scroll', onScroll)
       document.removeEventListener('mouseleave', onMouseLeave)
       window.removeEventListener('resize', onResize)

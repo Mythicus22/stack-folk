@@ -1,35 +1,36 @@
-/* ── Hero Section (Normal 100vh, zero empty space below) ── */
+/* ── Hero Main Section ── */
 .hero {
-  min-height: 100vh;
-  padding-top: 100px;
-  padding-bottom: 60px;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
   background: transparent;
 }
 
-.hero__container {
+.hero__main-container {
+  min-height: 90vh;
+  padding-top: 120px;
+  padding-bottom: 60px;
+  display: flex;
+  align-items: center;
   position: relative;
   z-index: 2;
   width: 100%;
 }
 
-/* ── 2-Column Split Grid ── */
+/* ── 2-Column Split: Logo & Description on Left | Very Very Big 3D on Right ── */
 .hero__split-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 0.95fr 1.05fr;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
   width: 100%;
 }
 
-/* ── Left Column ── */
-.hero__left {
+/* ── Left Content Column ── */
+.hero__left-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
+  max-width: 580px;
 }
 
 .hero__status-badge {
@@ -57,22 +58,22 @@
   animation: pulse-glow 2.5s infinite ease-in-out;
 }
 
-/* ── Enlarged Stackfolk Logo (No Black BG, Cyber Aura & Floating Animation) ── */
+/* ── Big Stackfolk Logo (Transparent, Cyber Glow, Floating Animation) ── */
 .hero__logo-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 520px;
-  margin: 4px 0;
+  max-width: 560px;
+  margin: 4px 0 8px;
   animation: float 6s ease-in-out infinite;
 }
 
 .hero__logo-aura {
   position: absolute;
-  inset: -15px -25px;
-  background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.22) 0%, rgba(57, 255, 20, 0.05) 45%, transparent 70%);
-  filter: blur(28px);
+  inset: -20px -30px;
+  background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.25) 0%, rgba(57, 255, 20, 0.05) 50%, transparent 70%);
+  filter: blur(32px);
   pointer-events: none;
   animation: glow-breathe 4s infinite ease-in-out;
 }
@@ -80,45 +81,22 @@
 .hero__stackfolk-logo {
   width: 100%;
   height: auto;
-  max-height: 110px;
+  max-height: 25rem;
   object-fit: contain;
   display: block;
-  filter: contrast(1.15) brightness(1.1) drop-shadow(0 0 24px rgba(57, 255, 20, 0.45));
+  filter: contrast(1.18) brightness(1.1) drop-shadow(0 0 28px rgba(57, 255, 20, 0.5));
   will-change: transform;
   transition: filter 0.3s ease;
 }
 
 .hero__stackfolk-logo:hover {
-  filter: contrast(1.2) brightness(1.15) drop-shadow(0 0 32px rgba(57, 255, 20, 0.7));
-}
-
-/* ── Tagline & Description ── */
-.hero__tagline-group {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.hero__tagline-text {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 5.2vw, 68px);
-  line-height: 0.95;
-  color: var(--white);
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.hero__tagline-accent {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--green);
-  text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  filter: contrast(1.22) brightness(1.18) drop-shadow(0 0 38px rgba(57, 255, 20, 0.75));
 }
 
 .hero__description {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.65;
   color: var(--gray-300);
-  max-width: 520px;
   margin: 0;
 }
 
@@ -127,55 +105,116 @@
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
-/* ── Right Column: 3D Video Frame Animation + Zero-Hack Event Card ── */
-.hero__right {
+/* ── Right Column: VERY VERY BIG 3D Animation ── */
+.hero__right-3d {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   width: 100%;
 }
 
-.hero__3d-container {
+.hero__3d-wrapper {
   width: 100%;
-  max-width: 440px;
+  max-width: 860px;
+  /* Very very big! */
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
 }
 
-/* ── Beautiful Zero-Hack Event Card ── */
+/* ── 2. BELOW HERO: Bauhaus Section (Build What's Next in 3 Lines | Zero-Hack Card) ── */
+.hero__bauhaus-section {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(57, 255, 20, 0.18);
+  padding: 100px 0;
+  background: rgba(5, 7, 5, 0.45);
+  backdrop-filter: blur(10px);
+}
+
+.hero__bauhaus-container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+}
+
+.hero__bauhaus-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero__bauhaus-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+/* 3-Line Massive Bauhaus Typography */
+.hero__bauhaus-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 0.9;
+  margin-top: 8px;
+}
+
+.hero__bauhaus-line {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 10vw, 135px);
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.hero__bauhaus-line--accent {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--green);
+  text-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+}
+
+/* ── Right: Zero-Hack Event Card following Bauhaus Design ── */
+.hero__bauhaus-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .hero__event-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   background: var(--green);
   color: var(--black);
-  padding: 24px 28px;
+  padding: 32px 32px;
   position: relative;
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .hero__event-card:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 18px 50px rgba(57, 255, 20, 0.45);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(57, 255, 20, 0.45);
 }
 
 .hero__event-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .hero__event-tag {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.7;
@@ -187,8 +226,8 @@
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
 }
 
 .hero__event-live-dot {
@@ -197,85 +236,85 @@
   background: var(--black);
   border-radius: 50%;
   animation: pulse-glow 1.5s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(0,0,0,0.8);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 }
 
 .hero__event-title {
   font-family: var(--font-display);
-  font-size: 42px;
+  font-size: 48px;
   line-height: 0.95;
   letter-spacing: -0.01em;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .hero__event-subtitle {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 14px;
-  opacity: 0.8;
+  margin-bottom: 20px;
+  opacity: 0.85;
 }
 
 .hero__event-badge {
-  width: 68px;
-  height: 68px;
+  width: 76px;
+  height: 76px;
   background: var(--black);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 24px;
-  top: 60px;
+  right: 28px;
+  top: 72px;
 }
 
 .hero__event-badge-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
 }
 
 .hero__event-badge-inner span {
   font-family: var(--font-mono);
-  font-size: 7px;
-  font-weight: 600;
+  font-size: 8px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--green);
   line-height: 1.2;
 }
 
 .hero__event-desc {
-  font-size: 13px;
-  line-height: 1.5;
-  opacity: 0.85;
-  margin-bottom: 16px;
-  max-width: 280px;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 20px;
+  max-width: 300px;
 }
 
 .hero__event-details {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid rgba(0,0,0,0.18);
-  padding-top: 12px;
-  margin-bottom: 18px;
+  gap: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 16px;
+  margin-bottom: 24px;
 }
 
 .hero__event-detail {
   display: flex;
-  gap: 12px;
-  font-size: 12px;
+  gap: 14px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
 .hero__event-detail-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.55;
-  min-width: 52px;
+  opacity: 0.6;
+  min-width: 56px;
   padding-top: 1px;
 }
 
@@ -285,10 +324,10 @@
   justify-content: space-between;
   background: var(--black);
   color: var(--green);
-  padding: 12px 18px;
+  padding: 14px 20px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.03em;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -299,33 +338,42 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 960px) {
-  .hero {
-    padding-top: 80px;
-  }
-
+@media (max-width: 1024px) {
   .hero__split-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 40px;
   }
 
-  .hero__right {
-    max-width: 500px;
-    margin: 0 auto;
+  .hero__left-content {
+    max-width: 100%;
   }
 
-  .hero__stackfolk-logo {
-    max-height: 80px;
+  .hero__bauhaus-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .hero__tagline-text {
-    font-size: clamp(32px, 8vw, 48px);
+  .hero__bauhaus-right {
+    justify-content: flex-start;
+  }
+
+  .hero__event-card {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 600px) {
-  .hero {
-    padding-top: 70px;
+  .hero__main-container {
+    padding-top: 90px;
+    padding-bottom: 40px;
+  }
+
+  .hero__stackfolk-logo {
+    max-height: 90px;
+  }
+
+  .hero__description {
+    font-size: 15px;
   }
 
   .hero__actions {
@@ -340,8 +388,16 @@
     justify-content: center;
   }
 
+  .hero__bauhaus-section {
+    padding: 60px 0;
+  }
+
+  .hero__bauhaus-line {
+    font-size: clamp(42px, 14vw, 76px);
+  }
+
   .hero__event-badge {
     position: static;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 }

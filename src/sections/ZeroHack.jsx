@@ -42,11 +42,6 @@ export default function ZeroHack() {
             transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
           />
 
-          <motion.div
-            className="zerohack__dot-geo"
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          />
         </div>
 
         {/* Right — Content */}
@@ -137,7 +132,7 @@ export default function ZeroHack() {
           >
             <span>Read the brief</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </motion.a>
         </div>

@@ -8,10 +8,10 @@ const pillars = [
     desc: 'Build with clarity and show the work. No stealth mode, just shipped products.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="2" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="16" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="2" y="16" width="10" height="10" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="16" y="16" width="10" height="10" fill="currentColor"/>
+        <rect x="2" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="16" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="2" y="16" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="16" y="16" width="10" height="10" fill="currentColor" />
       </svg>
     )
   },
@@ -21,9 +21,9 @@ const pillars = [
     desc: 'Teams form around curiosity, not credentials. Your stack is your handshake.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="20" cy="18" r="5" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M14 10h2M10 14v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="20" cy="18" r="5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M14 10h2M10 14v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     )
   },
@@ -33,8 +33,8 @@ const pillars = [
     desc: 'A prototype is the start, not the finish. Ship something real, every time.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M4 20L12 8l6 8 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="24" cy="6" r="3" fill="currentColor"/>
+        <path d="M4 20L12 8l6 8 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="24" cy="6" r="3" fill="currentColor" />
       </svg>
     )
   },
@@ -107,7 +107,6 @@ export default function WhyStackfolk() {
             >
               <span>JOIN</span>
               <span>NOW</span>
-              <div className="why__cta-arrow">↗</div>
             </motion.a>
           </div>
 

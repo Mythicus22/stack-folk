@@ -7,21 +7,21 @@ const programs = [
     title: 'Hackathons',
     desc: 'Focused challenges with real constraints. 24–48 hour sprints that force you to ship.',
     tag: 'FLAGSHIP',
-    icon: '⚡',
+    icon: '',
   },
   {
     num: '02',
     title: 'Build Nights',
     desc: 'Low-pressure sessions to get unstuck. Show your WIP, get feedback, keep moving.',
     tag: 'MONTHLY',
-    icon: '🌙',
+    icon: '',
   },
   {
     num: '03',
     title: 'Demo Rooms',
     desc: 'A sharp stage for useful work, not theatre. Show what you built, to people who get it.',
     tag: 'COMMUNITY',
-    icon: '🎯',
+    icon: '',
   },
 ]
 
