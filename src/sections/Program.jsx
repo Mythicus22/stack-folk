@@ -4,24 +4,31 @@ import './Program.css'
 const programs = [
   {
     num: '01',
-    title: 'Hackathons',
-    desc: 'Focused challenges with real constraints. 24–48 hour sprints that force you to ship.',
-    tag: 'FLAGSHIP',
-    icon: '',
+    time: '09:00 — 10:00',
+    title: 'Kickoff & Team Assembly',
+    desc: 'Keynote & problem briefs. Provisioning RPC nodes, agent SDKs, and matching solo builders into agile squads.',
+    tag: 'HOUR 01',
   },
   {
     num: '02',
-    title: 'Build Nights',
-    desc: 'Low-pressure sessions to get unstuck. Show your WIP, get feedback, keep moving.',
-    tag: 'MONTHLY',
-    icon: '',
+    time: '10:00 — 14:00',
+    title: 'Architecture & Agent Loops',
+    desc: 'Deep coding sprint. Setting up autonomous decision cycles, tool integrations, and ERC-4337 smart agent wallets.',
+    tag: 'HOURS 02–05',
   },
   {
     num: '03',
-    title: 'Demo Rooms',
-    desc: 'A sharp stage for useful work, not theatre. Show what you built, to people who get it.',
-    tag: 'COMMUNITY',
-    icon: '',
+    time: '14:00 — 18:00',
+    title: 'Onchain Swarms & Verification',
+    desc: '1-on-1 mentor reviews. Stress-testing multi-agent coordination, zkML inference, and deploying contracts on testnet.',
+    tag: 'HOURS 06–09',
+  },
+  {
+    num: '04',
+    time: '18:00 — 21:00',
+    title: 'Code Freeze & Live Demos',
+    desc: 'Repositories locked at 19:00. Every team demonstrates real autonomous transactions live on stage for jury scoring.',
+    tag: 'HOURS 10–12',
   },
 ]
 
@@ -41,7 +48,7 @@ export default function Program() {
           viewport={vp}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          02 / THE PROGRAM
+          02 / 12-HOUR HACKATHON SCHEDULE
         </motion.div>
 
         <div className="program__header">
@@ -52,9 +59,9 @@ export default function Program() {
             viewport={vp}
             transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Short sprints.
+            12 Hours.
             <br />
-            <span className="program__headline--outline">Serious outcomes.</span>
+            <span className="program__headline--outline">Real Shipped Systems.</span>
           </motion.h2>
 
           <motion.p
@@ -64,8 +71,8 @@ export default function Program() {
             viewport={vp}
             transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Every format is designed to push you past the planning stage
-            and into the thing that actually exists.
+            A high-intensity sprint designed to push beyond slide decks.
+            You walk in with an idea at 9 AM and walk out at 9 PM with an autonomous onchain agent.
           </motion.p>
         </div>
 
@@ -78,13 +85,12 @@ export default function Program() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={vp}
               transition={{ duration: 1.0, delay: 0.15 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -10, transition: { duration: 0.35 } }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
             >
               <div className="program__card-top">
-                <span className="program__card-num">{p.num}</span>
+                <span className="program__card-num">{p.time}</span>
                 <span className="program__card-tag">{p.tag}</span>
               </div>
-              <div className="program__card-icon">{p.icon}</div>
               <h3 className="program__card-title">{p.title}</h3>
               <p className="program__card-desc">{p.desc}</p>
               <div className="program__card-corner" />
@@ -100,8 +106,8 @@ export default function Program() {
           viewport={vp}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span>ZERO-HACK IS WHERE WE START.</span>
-          <a href="#join" className="program__banner-link">
+          <span>ZERO-HACK #1 // 10 JAN — 12 HOURS TO BUILD AUTONOMOUS SYSTEMS.</span>
+          <a href="#hackathons" className="program__banner-link">
             Apply now →
           </a>
         </motion.div>

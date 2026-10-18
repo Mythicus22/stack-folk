@@ -14,7 +14,7 @@ export default function CTA() {
           viewport={vp}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          STACKFOLK / GET STARTED
+          ZERO-HACK // 10 JAN
         </motion.div>
 
         <motion.h2
@@ -24,9 +24,9 @@ export default function CTA() {
           viewport={vp}
           transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          MAKE SOMETHING
+          FROM IDEAS
           <br />
-          WORTH SHARING.
+          <span style={{ color: 'var(--green)' }}>TO IMPACT.</span>
         </motion.h2>
 
         <motion.p
@@ -36,8 +36,8 @@ export default function CTA() {
           viewport={vp}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          The next good idea probably needs a room, a deadline,
-          and a few good people.
+          12 hours to build autonomous systems that act, own, and coordinate onchain.
+          Join the sprint on 10 JAN and build real solutions, together.
         </motion.p>
 
         <motion.div
@@ -47,13 +47,13 @@ export default function CTA() {
           viewport={vp}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <a href="#" className="btn-primary cta__btn-main">
-            <span>Join Stackfolk</span>
+          <a href="#hackathons" className="btn-primary cta__btn-main">
+            <span>Apply for Zero-Hack</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
-          <a href="#" className="btn-outline">
+          <a href="#sponsors" className="btn-outline">
             <span>Partner with us</span>
           </a>
         </motion.div>

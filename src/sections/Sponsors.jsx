@@ -3,31 +3,31 @@ import './Sponsors.css'
 
 const sponsorTiers = [
   {
-    tier: 'Founding Partner',
+    tier: 'Founding Infrastructure',
     sponsors: [
-      { name: 'TechVault', abbr: 'TV' },
-      { name: 'NexLayer', abbr: 'NL' },
+      { name: 'ZeroLayer', abbr: 'ZL' },
+      { name: 'AgenticNet', abbr: 'AN' },
     ]
   },
   {
-    tier: 'Ecosystem Partner',
+    tier: 'Inference & zkML',
     sponsors: [
-      { name: 'Chainform', abbr: 'CF' },
-      { name: 'BuildOS', abbr: 'BO' },
+      { name: 'ProofCompute', abbr: 'PC' },
+      { name: 'VeriMesh', abbr: 'VM' },
     ]
   },
   {
-    tier: 'Community Partner',
+    tier: 'Smart Account Wallets',
     sponsors: [
-      { name: 'DevPulse', abbr: 'DP' },
-      { name: 'AgentLabs', abbr: 'AL' },
+      { name: 'AgentKey 4337', abbr: 'AK' },
+      { name: 'OmniVault', abbr: 'OV' },
     ]
   },
   {
-    tier: 'Tools Partner',
+    tier: 'Ecosystem & Tools',
     sponsors: [
-      { name: 'StackKit', abbr: 'SK' },
-      { name: 'OpenMesh', abbr: 'OM' },
+      { name: 'SwarmDAO', abbr: 'SD' },
+      { name: 'OpenAgent Hub', abbr: 'OA' },
     ]
   },
 ]
@@ -45,7 +45,7 @@ export default function Sponsors() {
           viewport={vp}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          03 / PARTNERS
+          03 / PROTOCOL PARTNERS
         </motion.div>
 
         <motion.h2
@@ -55,9 +55,9 @@ export default function Sponsors() {
           viewport={vp}
           transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          Built with people
+          Built with teams
           <br />
-          who back builders.
+          backing autonomous agents.
         </motion.h2>
 
         <motion.p
@@ -67,7 +67,8 @@ export default function Sponsors() {
           viewport={vp}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          We partner with ecosystems, studios, and teams who want to help ambitious work get made.
+          Zero-Hack is supported by leading Web3 networks, decentralized compute providers,
+          and account abstraction protocols providing prize bounties, SDKs, and fast-track grants.
         </motion.p>
 
         {/* Sponsors grid */}

@@ -17,6 +17,17 @@ export default function LogoScrollSequence({ frameIndex = 1 }) {
       const img = new Image()
       const paddedIndex = String(i).padStart(3, '0')
       img.src = `/frames-transparent/frame-${paddedIndex}.webp`
+      if (i === 1) {
+        img.onload = () => {
+          const canvas = canvasRef.current
+          if (!canvas) return
+          const ctx = canvas.getContext('2d', { alpha: true })
+          if (ctx) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          }
+        }
+      }
       images.push(img)
     }
 

@@ -109,7 +109,7 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
             >
               <span className="hero__status-dot" />
-              <span>STACKFOLK // FOR BUILDERS &amp; FOUNDERS</span>
+              <span>STACKFOLK COMMUNITY // ZERO-HACK #1</span>
             </motion.div>
 
             {/* Big Stackfolk Logo */}
@@ -134,8 +134,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              A community for people who turn ambitious ideas into things that work —
-              through focused hackathons, honest feedback, and the right people in the room.
+              A community for people who turn ambitious ideas into things that work — through focused hackathons, honest feedback, and the right people in the room.
             </motion.p>
 
             {/* 2 Buttons */}
@@ -145,14 +144,14 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <a href="#join" className="btn-primary">
+              <a href="#hackathons" className="btn-primary">
                 <span>Explore Zero-Hack</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-              <a href="#community" className="btn-outline">
-                <span>Meet Community</span>
+              <a href="#program" className="btn-outline">
+                <span>12-Hour Format</span>
               </a>
             </motion.div>
           </div>
@@ -213,47 +212,51 @@ export default function Hero() {
               transition={{ duration: 0.85, delay: 0.2 }}
             >
               <div className="hero__event-header">
-                <span className="hero__event-tag">UP NEXT / HACKATHON #1</span>
+                <span className="hero__event-tag">COMMUNITY ORGANISES // 10 JAN</span>
                 <div className="hero__event-live">
                   <span className="hero__event-live-dot" />
-                  LIVE
+                  APPLICATIONS OPEN
                 </div>
               </div>
 
-              <div className="hero__event-title">ZERO-HACK</div>
-              <div className="hero__event-subtitle">Agentic AI × Web3</div>
+              <div className="hero__event-title">ZEROHACK</div>
+              <div className="hero__event-subtitle">Agentic AI × Web3 // 12-Hour Sprint</div>
 
               <div className="hero__event-badge">
                 <div className="hero__event-badge-inner">
-                  <span>ZERO</span>
-                  <span>APPLICATIONS</span>
-                  <span>OPEN</span>
+                  <span>10 JAN</span>
+                  <span>12 HOURS</span>
+                  <span>SPRINT</span>
                 </div>
               </div>
 
               <p className="hero__event-desc">
-                Build agents that act, own, and coordinate onchain.
+                A 12-hour hackathon to build real solutions, together. Turn ideas into code and code into impact.
               </p>
 
               <div className="hero__event-details">
                 <div className="hero__event-detail">
-                  <span className="hero__event-detail-label">FORMAT</span>
-                  <span>48-hour build sprint</span>
+                  <span className="hero__event-detail-label">DATE &amp; TIME</span>
+                  <span>10 JAN // 09:00 — 21:00</span>
                 </div>
                 <div className="hero__event-detail">
-                  <span className="hero__event-detail-label">TRACK</span>
-                  <span>Agentic systems + Web3 primitives</span>
+                  <span className="hero__event-detail-label">FORMAT</span>
+                  <span>12-Hour High-Intensity Build Sprint</span>
+                </div>
+                <div className="hero__event-detail">
+                  <span className="hero__event-detail-label">THEME</span>
+                  <span>Autonomous Onchain Agents &amp; Swarms</span>
                 </div>
                 <div className="hero__event-detail">
                   <span className="hero__event-detail-label">WHO</span>
-                  <span>Solo builders + teams</span>
+                  <span>AI Researchers, Web3 Devs &amp; Solo Builders</span>
                 </div>
               </div>
 
               <a href="#join" className="hero__event-cta">
                 Apply for Zero-Hack
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </motion.div>

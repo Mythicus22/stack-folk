@@ -14,8 +14,11 @@
 .faq__headline {
   font-family: var(--font-display);
   font-size: clamp(40px, 5vw, 64px);
-  line-height: 0.95;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   color: var(--white);
+  text-shadow: none;
   margin-top: 24px;
   position: sticky;
   top: 120px;
@@ -23,6 +26,7 @@
 
 .faq__headline--green {
   color: var(--green);
+  text-shadow: none;
 }
 
 /* ── List ── */

@@ -4,8 +4,20 @@ import './WhyStackfolk.css'
 const pillars = [
   {
     num: '01',
-    title: 'Make in public',
-    desc: 'Build with clarity and show the work. No stealth mode, just shipped products.',
+    title: 'Collaborate with Builders',
+    desc: 'Teams form around curiosity, code, and conviction. No credentials required — your commit history is your handshake.',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="20" cy="18" r="5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M14 10h2M10 14v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    )
+  },
+  {
+    num: '02',
+    title: 'Solve Real Problems',
+    desc: 'No toy prototypes. Every track addresses high-leverage bottlenecks in autonomous AI agents, onchain execution, and agent swarms.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <rect x="2" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />
@@ -16,21 +28,9 @@ const pillars = [
     )
   },
   {
-    num: '02',
-    title: 'Find your people',
-    desc: 'Teams form around curiosity, not credentials. Your stack is your handshake.',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="20" cy="18" r="5" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M14 10h2M10 14v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    )
-  },
-  {
     num: '03',
-    title: 'Leave with momentum',
-    desc: 'A prototype is the start, not the finish. Ship something real, every time.',
+    title: 'Build What Matters',
+    desc: 'From ideas to impact. Walk away with deployed contracts, live testnet transactions, and systems that endure beyond the hackathon.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M4 20L12 8l6 8 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -65,7 +65,7 @@ export default function WhyStackfolk() {
               viewport={vp}
               transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              The stack is better when the people are.
+              The stack is better when the builders are.
             </motion.h2>
 
             <motion.p
@@ -75,13 +75,13 @@ export default function WhyStackfolk() {
               viewport={vp}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              Stackfolk is where technical talent meets momentum. We create spaces to make,
-              share, challenge, and keep going — long after the demo ends.
+              Stackfolk is a community for builders turning ambitious ideas into things that work.
+              We unite AI engineers and Web3 developers for high-velocity hackathons, honest technical feedback, and meaningful launches.
             </motion.p>
 
             {/* Stats */}
             <div className="why__stats">
-              {[['500+', 'Builders'], ['12', 'Countries'], ['3', 'Hackathons']].map(([num, label], i) => (
+              {[['1,200+', 'Builders'], ['12h', 'Sprint Focus'], ['10 JAN', 'Zero-Hack #1']].map(([num, label], i) => (
                 <motion.div
                   key={label}
                   className="why__stat"

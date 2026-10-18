@@ -4,11 +4,11 @@ import { Menu, X } from 'lucide-react'
 import './Navbar.css'
 
 const navLinks = [
-  { label: 'Hackathons', href: '#hackathons' },
-  { label: 'Community', href: '#community' },
-  { label: 'Program', href: '#program' },
-  { label: 'Sponsors', href: '#sponsors' },
-  { label: 'About', href: '#about' },
+  { label: 'Zero-Hack', href: '#hackathons' },
+  { label: '12H Schedule', href: '#program' },
+  { label: 'Why Stackfolk', href: '#community' },
+  { label: 'Partners', href: '#sponsors' },
+  { label: 'FAQ', href: '#faq' },
 ]
 
 export default function Navbar() {
@@ -48,8 +48,8 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="navbar__cta">
-          <a href="#join" className="btn-primary">
-            <span>Join the Stack</span>
+          <a href="#hackathons" className="btn-primary">
+            <span>Apply Zero-Hack</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

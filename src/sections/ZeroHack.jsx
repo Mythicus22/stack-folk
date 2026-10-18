@@ -3,15 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import './ZeroHack.css'
 
 const steps = [
-  { num: '#1', label: 'Form a team' },
-  { num: '#2', label: 'Build the loop' },
-  { num: '#3', label: 'Show the proof' },
+  { num: '#1', label: 'Collaborate with Builders' },
+  { num: '#2', label: 'Solve Real Problems' },
+  { num: '#3', label: 'Build What Matters' },
 ]
 
 const tracks = [
-  { label: 'Agent design', color: 'green' },
-  { label: 'Onchain actions', color: 'white' },
-  { label: 'Human × machine teams', color: 'outline' },
+  { label: 'Autonomous Onchain Agents', color: 'green' },
+  { label: 'Multi-Agent Swarms & A2A', color: 'white' },
+  { label: 'Verifiable AI & zkML', color: 'outline' },
+  { label: 'Agent Wallets (ERC-4337)', color: 'green' },
 ]
 
 const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
@@ -31,9 +32,9 @@ export default function ZeroHack() {
             viewport={vp}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span>AGENTS</span>
-            <span>WITH</span>
-            <span className="zerohack__accent">AGENCY</span>
+            <span>IDEAS</span>
+            <span>CODE</span>
+            <span className="zerohack__accent">IMPACT</span>
           </motion.div>
 
           <motion.div
@@ -53,7 +54,7 @@ export default function ZeroHack() {
             viewport={vp}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            ZERO-HACK / THE BRIEF
+            ZERO-HACK #1 // 10 JAN
           </motion.div>
 
           <motion.h2
@@ -73,8 +74,9 @@ export default function ZeroHack() {
             viewport={vp}
             transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Zero-Hack is an agentic AI and Web3 hackathon for builders exploring what
-            happens when software can coordinate, transact, and participate.
+            Zero-Hack is a 12-hour high-stakes sprint for engineers, researchers, and
+            Web3 builders. Build autonomous software that holds balances, triggers
+            smart contracts, negotiates with other agents, and executes onchain.
           </motion.p>
 
           {/* Tracks */}

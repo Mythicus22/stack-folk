@@ -46,7 +46,7 @@ export default function ThreeDBackground() {
       const ctx = c.getContext('2d')
 
       ctx.clearRect(0, 0, 128, 128)
-      ctx.font = 'bold 54px "DM Mono", "Courier New", monospace'
+      ctx.font = 'bold 54px "JetBrains Mono", "Courier New", monospace'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
 

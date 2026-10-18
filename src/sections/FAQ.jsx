@@ -5,24 +5,28 @@ import './FAQ.css'
 
 const faqs = [
   {
-    q: 'Who is Stackfolk for?',
-    a: 'Anyone who builds — developers, designers, technical founders, and curious people who want to make real things. If you write code, design systems, or prototype ideas, you\'re the right person.'
+    q: 'What is Zero-Hack?',
+    a: 'Zero-Hack is a 12-hour hackathon on 10 JAN organized by Stackfolk, focused entirely on the intersection of Agentic AI and Web3. We bring together machine learning researchers and blockchain developers to build autonomous systems that act, transact, and coordinate onchain.'
   },
   {
-    q: 'Can I join without a team?',
-    a: 'Absolutely. Many of our best participants came solo and found their team at the event. We have structured team formation sessions before every hackathon to help people connect.'
+    q: 'How does the 12-hour format work?',
+    a: '12 high-intensity hours from 09:00 to 21:00. Kickoff and team matching at 9 AM, followed by two deep build sprints with direct protocol mentor check-ins. Repositories freeze at 19:00, followed by live on-stage agent demonstrations and prize awards.'
   },
   {
-    q: 'How do I partner with Zero-Hack?',
-    a: 'Reach out to us via the contact form or join our Discord and ping us directly. We offer founding, ecosystem, community, and tools partnership tiers with different involvement levels.'
+    q: 'Can I join solo or without a team?',
+    a: 'Absolutely! Solo builders are warmly welcome. We run a structured team formation session during the first hour (09:00 - 10:00) to help you connect with builders across AI and Web3.'
   },
   {
     q: 'What can I build at Zero-Hack?',
-    a: 'Zero-Hack is focused on Agentic AI and Web3. Think: autonomous agents that transact onchain, AI systems that use wallets, multi-agent coordination, and human-machine hybrid teams.'
+    a: 'Autonomous onchain agents, multi-agent swarms (A2A protocols), ERC-4337 smart account wallets for AI, prediction market bots, zkML verification loops, and decentralized autonomous infrastructure.'
   },
   {
     q: 'Is there a cost to participate?',
-    a: 'Hackathons are free to enter. Community membership is open and free. We believe access shouldn\'t be a barrier to building.'
+    a: 'Zero-Hack is completely free for all accepted builders. Food, drinks, compute credits, testnet tokens, and protocol SDK access are fully provided.'
+  },
+  {
+    q: 'How are projects evaluated?',
+    a: 'Judging follows our core motto: Ideas (novel agentic architecture), Code (technical depth & onchain execution), and Impact (real utility and live testnet verification). Pre-recorded videos are not allowed — live agent execution is mandatory.'
   },
 ]
 
@@ -32,7 +36,7 @@ export default function FAQ() {
   const [open, setOpen] = useState(null)
 
   return (
-    <section className="faq section">
+    <section className="faq section" id="faq">
       <div className="container">
         <div className="faq__grid">
           <div className="faq__left">

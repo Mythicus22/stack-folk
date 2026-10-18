@@ -20,9 +20,11 @@
 .cta__headline {
   font-family: var(--font-display);
   font-size: clamp(64px, 10vw, 140px);
-  line-height: 0.92;
-  color: #f5f5f0;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  line-height: 0.95;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  text-shadow: none;
   margin: 24px 0 24px;
   position: relative;
   z-index: 2;
