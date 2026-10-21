@@ -6,23 +6,23 @@ import './FAQ.css'
 const faqs = [
   {
     q: 'What is Zero-Hack?',
-    a: 'Zero-Hack is a 12-hour hackathon on 10 JAN organized by Stackfolk, focused entirely on the intersection of Agentic AI and Web3. We bring together machine learning researchers and blockchain developers to build autonomous systems that act, transact, and coordinate onchain.'
+    a: 'ZeroHack is a 12-hour hackathon by StackFolk, bringing together 120 aspiring developers, innovators, and problem-solvers to build, experiment, and collaborate on real-world challenges. Spanning five tracks—AI Agents, Web3, IoT, Cybersecurity, and Open Innovation—the event aims to create an environment where bold ideas turn into working solutions and talented builders connect beyond boundaries.'
   },
   {
     q: 'How does the 12-hour format work?',
-    a: '12 high-intensity hours from 09:00 to 21:00. Kickoff and team matching at 9 AM, followed by two deep build sprints with direct protocol mentor check-ins. Repositories freeze at 19:00, followed by live on-stage agent demonstrations and prize awards.'
+    a: '12 high-intensity hours from 09:00 to 21:00. Kickoff and challenge briefing at 9 AM, followed by two focused build sprints with mentor reviews. Repositories freeze at 19:00, followed by live on-stage demonstrations and awards across the 5 tracks.'
   },
   {
     q: 'Can I join solo or without a team?',
-    a: 'Absolutely! Solo builders are warmly welcome. We run a structured team formation session during the first hour (09:00 - 10:00) to help you connect with builders across AI and Web3.'
+    a: 'Absolutely! Solo builders are warmly welcome. We run a structured team formation session during the first hour (09:00 - 10:00) to help you connect with 120 talented builders across AI Agents, Web3, IoT, Cybersecurity, and Open Innovation.'
   },
   {
     q: 'What can I build at Zero-Hack?',
-    a: 'Autonomous onchain agents, multi-agent swarms (A2A protocols), ERC-4337 smart account wallets for AI, prediction market bots, zkML verification loops, and decentralized autonomous infrastructure.'
+    a: 'Projects can be built within any of our 5 official tracks: AI Agents (autonomous workflows, swarms, intelligent agents), Web3 (smart contracts, DeFi, decentralized apps), IoT (connected hardware, sensor intelligence), Cybersecurity (threat defense, verifiable systems), and Open Innovation (interdisciplinary solutions).'
   },
   {
     q: 'Is there a cost to participate?',
-    a: 'Zero-Hack is completely free for all accepted builders. Food, drinks, compute credits, testnet tokens, and protocol SDK access are fully provided.'
+    a: 'Zero-Hack is completely free for all 120 accepted builders. Food, drinks, compute credits, testnet resources, and mentor access are fully provided.'
   },
   {
     q: 'How are projects evaluated?',

@@ -9,10 +9,11 @@ const steps = [
 ]
 
 const tracks = [
-  { label: 'Autonomous Onchain Agents', color: 'green' },
-  { label: 'Multi-Agent Swarms & A2A', color: 'white' },
-  { label: 'Verifiable AI & zkML', color: 'outline' },
-  { label: 'Agent Wallets (ERC-4337)', color: 'green' },
+  { label: 'AI Agents', color: 'green' },
+  { label: 'Web3', color: 'white' },
+  { label: 'IoT', color: 'outline' },
+  { label: 'Cybersecurity', color: 'green' },
+  { label: 'Open Innovation', color: 'white' },
 ]
 
 const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
@@ -64,7 +65,7 @@ export default function ZeroHack() {
             viewport={vp}
             transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Give your agent a wallet, a world, and a reason to act.
+            Where bold ideas turn into working solutions.
           </motion.h2>
 
           <motion.p
@@ -74,9 +75,7 @@ export default function ZeroHack() {
             viewport={vp}
             transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Zero-Hack is a 12-hour high-stakes sprint for engineers, researchers, and
-            Web3 builders. Build autonomous software that holds balances, triggers
-            smart contracts, negotiates with other agents, and executes onchain.
+            ZeroHack is a 12-hour hackathon by StackFolk, bringing together 120 aspiring developers, innovators, and problem-solvers to build, experiment, and collaborate on real-world challenges. Spanning five tracks—AI Agents, Web3, IoT, Cybersecurity, and Open Innovation—the event aims to create an environment where bold ideas turn into working solutions and talented builders connect beyond boundaries.
           </motion.p>
 
           {/* Tracks */}
@@ -125,7 +124,7 @@ export default function ZeroHack() {
           </div>
 
           <motion.a
-            href="#join"
+            href="#hackathons"
             className="btn-primary"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

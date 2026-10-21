@@ -1,37 +1,6 @@
 import { motion } from 'framer-motion'
 import './Sponsors.css'
 
-const sponsorTiers = [
-  {
-    tier: 'Founding Infrastructure',
-    sponsors: [
-      { name: 'ZeroLayer', abbr: 'ZL' },
-      { name: 'AgenticNet', abbr: 'AN' },
-    ]
-  },
-  {
-    tier: 'Inference & zkML',
-    sponsors: [
-      { name: 'ProofCompute', abbr: 'PC' },
-      { name: 'VeriMesh', abbr: 'VM' },
-    ]
-  },
-  {
-    tier: 'Smart Account Wallets',
-    sponsors: [
-      { name: 'AgentKey 4337', abbr: 'AK' },
-      { name: 'OmniVault', abbr: 'OV' },
-    ]
-  },
-  {
-    tier: 'Ecosystem & Tools',
-    sponsors: [
-      { name: 'SwarmDAO', abbr: 'SD' },
-      { name: 'OpenAgent Hub', abbr: 'OA' },
-    ]
-  },
-]
-
 const vp = { once: false, amount: 0.15, margin: '0px 0px -40px 0px' }
 
 export default function Sponsors() {
@@ -67,51 +36,47 @@ export default function Sponsors() {
           viewport={vp}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          Zero-Hack is supported by leading Web3 networks, decentralized compute providers,
-          and account abstraction protocols providing prize bounties, SDKs, and fast-track grants.
+          Zero-Hack is backed by premier Web3 networks, compute providers, and account abstraction protocols
+          providing developer bounties, grants, and direct API access.
         </motion.p>
 
-        {/* Sponsors grid */}
-        <div className="sponsors__grid">
-          {sponsorTiers.map((tier, ti) => (
-            <div key={tier.tier} className="sponsors__tier">
-              <motion.div
-                className="sponsors__tier-label"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={vp}
-                transition={{ duration: 0.8, delay: 0.15 + ti * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {tier.tier}
-              </motion.div>
-              {tier.sponsors.map((s, si) => (
-                <motion.div
-                  key={s.name}
-                  className="sponsors__slot"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={vp}
-                  transition={{ duration: 0.8, delay: 0.2 + (ti * 2 + si) * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ borderColor: 'rgba(57,255,20,0.5)', y: -6, transition: { duration: 0.3 } }}
-                >
-                  <div className="sponsors__slot-abbr">{s.abbr}</div>
-                  <div className="sponsors__slot-name">{s.name}</div>
-                </motion.div>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <motion.a
-          href="#contact"
-          className="sponsors__cta"
+        {/* To Be Announced Soon Showcase */}
+        <motion.div
+          className="sponsors__tba-card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          Become a sponsor →
-        </motion.a>
+          <div className="sponsors__tba-top">
+            <div className="sponsors__tba-status">
+              <span className="sponsors__tba-pulse" />
+              <span>OFFICIAL PARTNER ROSTER</span>
+            </div>
+            <div className="sponsors__tba-badge">ZERO-HACK // 10 JAN</div>
+          </div>
+
+          <div className="sponsors__tba-content">
+            <h3 className="sponsors__tba-title">To Be Announced Soon</h3>
+            <p className="sponsors__tba-description">
+              Our line-up of foundation sponsors, prize bounties, compute credits, and mentoring
+              protocols is being finalized and will be revealed ahead of the hackathon.
+            </p>
+          </div>
+
+          <div className="sponsors__tba-footer">
+            <span className="sponsors__tba-meta">Want to support builders with bounties or compute?</span>
+            <a
+              href="mailto:contact@stackfolk.com?subject=Zero-Hack%20Sponsorship%20Inquiry"
+              className="btn-primary sponsors__tba-btn"
+            >
+              <span>Partner with us</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

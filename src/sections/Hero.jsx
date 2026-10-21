@@ -220,18 +220,18 @@ export default function Hero() {
               </div>
 
               <div className="hero__event-title">ZEROHACK</div>
-              <div className="hero__event-subtitle">Agentic AI × Web3 // 12-Hour Sprint</div>
+              <div className="hero__event-subtitle">120 Builders // 5 Tracks // 12-Hour Sprint</div>
 
               <div className="hero__event-badge">
                 <div className="hero__event-badge-inner">
                   <span>10 JAN</span>
                   <span>12 HOURS</span>
-                  <span>SPRINT</span>
+                  <span>120 BUILDERS</span>
                 </div>
               </div>
 
               <p className="hero__event-desc">
-                A 12-hour hackathon to build real solutions, together. Turn ideas into code and code into impact.
+                ZeroHack is a 12-hour hackathon by StackFolk, bringing together 120 aspiring developers, innovators, and problem-solvers to build, experiment, and collaborate on real-world challenges.
               </p>
 
               <div className="hero__event-details">
@@ -244,16 +244,16 @@ export default function Hero() {
                   <span>12-Hour High-Intensity Build Sprint</span>
                 </div>
                 <div className="hero__event-detail">
-                  <span className="hero__event-detail-label">THEME</span>
-                  <span>Autonomous Onchain Agents &amp; Swarms</span>
+                  <span className="hero__event-detail-label">5 TRACKS</span>
+                  <span>AI Agents · Web3 · IoT · Cybersecurity · Open Innovation</span>
                 </div>
                 <div className="hero__event-detail">
                   <span className="hero__event-detail-label">WHO</span>
-                  <span>AI Researchers, Web3 Devs &amp; Solo Builders</span>
+                  <span>120 Developers, Innovators &amp; Problem-Solvers</span>
                 </div>
               </div>
 
-              <a href="#join" className="hero__event-cta">
+              <a href="#hackathons" className="hero__event-cta">
                 Apply for Zero-Hack
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

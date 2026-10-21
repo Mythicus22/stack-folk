@@ -8,6 +8,7 @@ const navLinks = [
   { label: '12H Schedule', href: '#program' },
   { label: 'Why Stackfolk', href: '#community' },
   { label: 'Partners', href: '#sponsors' },
+  { label: 'Past Events', href: '#past-events' },
   { label: 'FAQ', href: '#faq' },
 ]
 
@@ -91,7 +92,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
-              href="#join"
+              href="#hackathons"
               className="btn-primary"
               style={{ marginTop: '16px', alignSelf: 'flex-start' }}
               initial={{ opacity: 0 }}

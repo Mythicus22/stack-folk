@@ -3,7 +3,7 @@ import './Footer.css'
 const footerLinks = {
   'Zero-Hack': ['10 JAN Sprint', 'Agentic AI Tracks', '12H Schedule', 'Apply Now'],
   'Community': ['Discord', 'X / Twitter', 'GitHub', 'Luma'],
-  'Ecosystem': ['Partners', 'Mentors', 'FAQ', 'Manifesto'],
+  'Ecosystem': ['Partners', 'Past Events', 'FAQ', 'Manifesto'],
 }
 
 export default function Footer() {
@@ -30,7 +30,7 @@ export default function Footer() {
               <ul className="footer__links">
                 {links.map(link => (
                   <li key={link}>
-                    <a href={link === 'Apply Now' ? '#hackathons' : link === '12H Schedule' ? '#program' : link === 'FAQ' ? '#faq' : link === 'Partners' ? '#sponsors' : '#'} className="footer__link">{link}</a>
+                    <a href={link === 'Apply Now' ? '#hackathons' : link === '12H Schedule' ? '#program' : link === 'FAQ' ? '#faq' : link === 'Partners' ? '#sponsors' : link === 'Past Events' ? '#past-events' : '#'} className="footer__link">{link}</a>
                   </li>
                 ))}
               </ul>

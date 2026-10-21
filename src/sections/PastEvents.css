@@ -1,0 +1,181 @@
+.past-events {
+  background: transparent;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 120px 0 100px;
+}
+
+.past-events__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.past-events__headline {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.8vw, 60px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin-top: 20px;
+}
+
+.past-events__accent {
+  color: var(--green);
+  text-shadow: 0 0 24px rgba(57, 255, 20, 0.35);
+}
+
+.past-events__desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray-400);
+  max-width: 480px;
+  margin-bottom: 8px;
+}
+
+/* ── Bento Grid ── */
+.past-events__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.past-events__card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #080a08;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.past-events__card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(57, 255, 20, 0.7);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(57, 255, 20, 0.3);
+}
+
+.past-events__card--large {
+  grid-column: span 7;
+}
+
+.past-events__card--tall {
+  grid-column: span 5;
+}
+
+.past-events__card--medium {
+  grid-column: span 6;
+}
+
+.past-events__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  background: #0a0c0a;
+}
+
+.past-events__card--large .past-events__image-wrapper {
+  height: 400px;
+}
+
+.past-events__card--tall .past-events__image-wrapper {
+  height: 400px;
+}
+
+/* 0% transparent — completely opaque, vibrant, 100% visible */
+.past-events__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  filter: brightness(1) contrast(1.04) saturate(1.06);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.4s ease;
+  will-change: transform;
+  display: block;
+}
+
+.past-events__card:hover .past-events__image {
+  transform: scale(1.06);
+  filter: brightness(1.05) contrast(1.08) saturate(1.1);
+}
+
+/* Floating Bauhaus Minimal Tag */
+.past-events__tag-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(8, 10, 8, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.past-events__tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  transition: transform 0.3s ease;
+}
+
+.past-events__card:hover .past-events__tag-badge {
+  border-color: rgba(57, 255, 20, 0.6);
+  background: rgba(6, 8, 6, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(57, 255, 20, 0.2);
+}
+
+.past-events__card:hover .past-events__tag-dot {
+  transform: scale(1.4);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .past-events__card--large,
+  .past-events__card--tall,
+  .past-events__card--medium {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .past-events {
+    padding: 80px 0 60px;
+  }
+
+  .past-events__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .past-events__card--large,
+  .past-events__card--tall,
+  .past-events__card--medium {
+    grid-column: span 1;
+  }
+
+  .past-events__image-wrapper,
+  .past-events__card--large .past-events__image-wrapper,
+  .past-events__card--tall .past-events__image-wrapper {
+    height: 260px;
+  }
+}

@@ -10,9 +10,10 @@ import WhyStackfolk from './sections/WhyStackfolk'
 import Program from './sections/Program'
 import ZeroHack from './sections/ZeroHack'
 import Sponsors from './sections/Sponsors'
+import PastEvents from './sections/PastEvents'
+import PastSponsors from './sections/PastSponsors'
 import Community from './sections/Community'
 import FAQ from './sections/FAQ'
-import CTA from './sections/CTA'
 
 export default function App() {
   const { cursorRef } = useCursor()
@@ -39,9 +40,10 @@ export default function App() {
         <Program />
         <ZeroHack />
         <Sponsors />
+        <PastEvents />
+        <PastSponsors />
         <Community />
         <FAQ />
-        <CTA />
       </main>
 
       <Footer />

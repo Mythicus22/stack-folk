@@ -76,12 +76,12 @@ export default function WhyStackfolk() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               Stackfolk is a community for builders turning ambitious ideas into things that work.
-              We unite AI engineers and Web3 developers for high-velocity hackathons, honest technical feedback, and meaningful launches.
+              We bring together 120 aspiring developers, innovators, and problem-solvers across AI Agents, Web3, IoT, Cybersecurity, and Open Innovation to build, experiment, and collaborate on real-world challenges.
             </motion.p>
 
             {/* Stats */}
             <div className="why__stats">
-              {[['1,200+', 'Builders'], ['12h', 'Sprint Focus'], ['10 JAN', 'Zero-Hack #1']].map(([num, label], i) => (
+              {[['120', 'Builders'], ['5', 'Tracks'], ['12h', 'Sprint Focus']].map(([num, label], i) => (
                 <motion.div
                   key={label}
                   className="why__stat"
@@ -97,7 +97,7 @@ export default function WhyStackfolk() {
             </div>
 
             <motion.a
-              href="#join"
+              href="#hackathons"
               className="why__cta-circle"
               initial={{ scale: 0, rotate: -25 }}
               whileInView={{ scale: 1, rotate: 0 }}

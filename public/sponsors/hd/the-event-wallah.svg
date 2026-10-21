@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" width="240" height="70">
+  <path d="M120 12L135 20V34C135 44 120 52 120 52C120 52 105 44 105 34V20L120 12Z" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="120" y="36" text-anchor="middle" fill="#1e293b" font-family="'Inter', sans-serif" font-weight="900" font-size="14">TE</text>
+  <text x="120" y="64" text-anchor="middle" fill="#1e293b" font-family="'Inter', sans-serif" font-weight="600" font-size="10">The Event Wallah</text>
+</svg>

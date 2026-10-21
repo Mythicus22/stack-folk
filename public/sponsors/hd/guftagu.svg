@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 55" width="100%" height="100%">
+  <circle cx="145" cy="20" r="7" fill="#06b6d4"/>
+  <circle cx="157" cy="16" r="6" fill="#10b981"/>
+  <text x="30" y="37" fill="#ea580c" font-family="'Inter', sans-serif" font-weight="900" font-size="32">Guft<tspan fill="#475569">gu</tspan></text>
+  <text x="32" y="49" fill="#64748b" font-family="'Inter', sans-serif" font-weight="600" font-size="8">Circle Of Trust</text>
+</svg>
