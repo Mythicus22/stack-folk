@@ -5,29 +5,29 @@ const programs = [
   {
     num: '01',
     time: '09:00 — 10:00',
-    title: 'Kickoff & Team Assembly',
-    desc: 'Keynote & problem briefs. Provisioning RPC nodes, agent SDKs, and matching solo builders into agile squads.',
+    title: 'Team Assembly',
+    desc: 'Keynote, problem track briefings, and team formation. Solo builders match with complementary engineers and designers to lock in their squads and project scope.',
     tag: 'HOUR 01',
   },
   {
     num: '02',
     time: '10:00 — 14:00',
-    title: 'Architecture & Agent Loops',
-    desc: 'Deep coding sprint. Setting up autonomous decision cycles, tool integrations, and ERC-4337 smart agent wallets.',
+    title: 'Building Phase',
+    desc: 'Core development sprint. Squads architect their solutions, spin up repositories, integrate APIs and hardware, and build the functional MVP.',
     tag: 'HOURS 02–05',
   },
   {
     num: '03',
     time: '14:00 — 18:00',
-    title: 'Onchain Swarms & Verification',
-    desc: '1-on-1 mentor reviews. Stress-testing multi-agent coordination, zkML inference, and deploying contracts on testnet.',
+    title: 'Mentorship Phase',
+    desc: '1-on-1 mentor check-ins and technical guidance. Industry experts stress-test architectures, assist with debugging, and help refine key product features.',
     tag: 'HOURS 06–09',
   },
   {
     num: '04',
     time: '18:00 — 21:00',
-    title: 'Code Freeze & Live Demos',
-    desc: 'Repositories locked at 19:00. Every team demonstrates real autonomous transactions live on stage for jury scoring.',
+    title: 'Presentation Phase',
+    desc: 'Code freeze, final submissions, and live stage demos. Every team showcases their working system live to the jury panel for evaluation and scoring.',
     tag: 'HOURS 10–12',
   },
 ]
@@ -72,7 +72,7 @@ export default function Program() {
             transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             A high-intensity sprint designed to push beyond slide decks.
-            You walk in with an idea at 9 AM and walk out at 9 PM with an autonomous onchain agent.
+            You walk in with an idea at 9 AM and walk out at 9 PM with a deployed, working prototype.
           </motion.p>
         </div>
 
@@ -106,7 +106,7 @@ export default function Program() {
           viewport={vp}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span>ZERO-HACK #1 // 10 JAN — 12 HOURS TO BUILD AUTONOMOUS SYSTEMS.</span>
+          <span>ZERO-HACK #1 // 10 JAN — 12 HOURS TO BUILD, INNOVATE, AND SHIP REAL SYSTEMS.</span>
           <a href="#hackathons" className="program__banner-link">
             Apply now →
           </a>

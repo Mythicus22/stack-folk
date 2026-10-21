@@ -17,7 +17,7 @@ const pillars = [
   {
     num: '02',
     title: 'Solve Real Problems',
-    desc: 'No toy prototypes. Every track addresses high-leverage bottlenecks in autonomous AI agents, onchain execution, and agent swarms.',
+    desc: 'No toy prototypes. Every track addresses high-leverage bottlenecks across AI Agents, Web3, IoT, Cybersecurity, and Open Innovation.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <rect x="2" y="2" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />

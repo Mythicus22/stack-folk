@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'How are projects evaluated?',
-    a: 'Judging follows our core motto: Ideas (novel agentic architecture), Code (technical depth & onchain execution), and Impact (real utility and live testnet verification). Pre-recorded videos are not allowed — live agent execution is mandatory.'
+    a: 'Judging follows our core motto: Ideas (novel problem solving), Code (technical depth & implementation quality), and Impact (real utility and working prototype). Pre-recorded videos are not allowed — live demo execution is mandatory.'
   },
 ]
 
